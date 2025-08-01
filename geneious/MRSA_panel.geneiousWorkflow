@@ -1,0 +1,1884 @@
+<geneiousWorkflows>
+  <XMLSerialisableRootElement name="MRSA panel 2025-07-30" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="17bce539-6c70-441d-9ee7-50f26354db65" revisionNumber="16" description="" bundledIconName="plugin">
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachSequence</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">sequence_length</option>
+            <option name="condition">greater_than</option>
+            <option name="value">200</option>
+          </value>
+          <value>
+            <option name="field">sequence_length</option>
+            <option name="condition">less_than</option>
+            <option name="value">700</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="advancedCheckbox">true</option>
+        <option name="customComponent1" />
+        <childOption name="renameMethodChildOptions">
+          <option name="selectedRenameMethod">renamableOption0</option>
+          <childOption name="BatchRenameSubOptions0">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="startBatchIndexOption">0</option>
+            <option name="endBatchIndexInclusiveOption">2147483647</option>
+            <option name="sequencesInSequenceListDocumentRenamableSequenceType">allSequencesInListOption</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions1">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="followAndRenameReferences">true</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions2">
+            <option name="selectedFieldComboOption">fieldOptioncache_name</option>
+          </childOption>
+        </childOption>
+        <childOption name="basicSuperOptions">
+          <option name="task">replaceWithRadioButton</option>
+          <option name="r1">fieldOptioncache_name</option>
+          <option name="rSep" />
+          <option name="r2">nothingSelectedOption</option>
+          <option name="rSep2" />
+          <option name="r3">nothingSelectedOption</option>
+          <option name="appendTextField" />
+          <option name="appendPositionComboBox">endValue</option>
+          <option name="removeHowMuchIntegerOption">1</option>
+          <option name="removePositionComboBox">endValue</option>
+        </childOption>
+        <childOption name="advancedSuperOptions">
+          <option name="replaceWhatTypeRadioOption">entireFieldOption</option>
+          <option name="replaceWhatTextField" />
+          <option name="ignoreCaseCheckbox">true</option>
+          <option name="isRegexCheckbox">false</option>
+          <option name="replaceWithTextField">{$name_SLD[1:36]}</option>
+          <option name="plusButton">Add Property...</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="advancedCheckbox" label="" />
+    </workflowElement>
+    <workflowElement id="BBDuk" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="trimAdapters">false</option>
+        <option name="qualityTrim">true</option>
+        <option name="trimPairedOverlap">false</option>
+        <option name="trimLowEntropy">false</option>
+        <option name="discardShortReads">false</option>
+        <option name="keepOrder">true</option>
+        <option name="customComponent1" />
+        <option name="memoryToAllocate">1000</option>
+        <option name="additionalOptions">maq=19</option>
+        <option name="customComponent2" />
+        <childOption name="adapterTrimming">
+          <option name="adapters">inMemoryDocument__|urn:local:BBDukOptions:adapters.fa|All Truseq, Nextera and PhiX adapters___</option>
+          <option name="customComponent1" />
+          <option name="adapterTrimDirection">r</option>
+          <option name="adapterKMer">27</option>
+          <option name="maximumSubstitutions">1</option>
+          <option name="maximumEdits">0</option>
+          <option name="shortTrim">false</option>
+          <option name="shortTrimLength">4</option>
+        </childOption>
+        <childOption name="qualityTrimming">
+          <option name="qualityTrimEnds">rl</option>
+          <option name="minimumQuality">9</option>
+        </childOption>
+        <childOption name="overlapOptions">
+          <option name="pairOverlap">24</option>
+        </childOption>
+        <childOption name="entropyOptions">
+          <option name="minimumEntropy">0.1</option>
+          <option name="windowSize">50</option>
+          <option name="entropyKmerSize">5</option>
+        </childOption>
+        <childOption name="minimumLengthOptions">
+          <option name="minLength">10</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="trimAdapters" label="" />
+    </workflowElement>
+    <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="advancedCheckbox">true</option>
+        <option name="customComponent1" />
+        <childOption name="renameMethodChildOptions">
+          <option name="selectedRenameMethod">renamableOption2</option>
+          <childOption name="BatchRenameSubOptions0">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="startBatchIndexOption">0</option>
+            <option name="endBatchIndexInclusiveOption">2147483647</option>
+            <option name="sequencesInSequenceListDocumentRenamableSequenceType">allSequencesInListOption</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions1">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="followAndRenameReferences">true</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions2">
+            <option name="selectedFieldComboOption">fieldOptioncache_name</option>
+          </childOption>
+        </childOption>
+        <childOption name="basicSuperOptions">
+          <option name="task">replaceWithRadioButton</option>
+          <option name="r1">fieldOptioncache_name</option>
+          <option name="rSep" />
+          <option name="r2">nothingSelectedOption</option>
+          <option name="rSep2" />
+          <option name="r3">nothingSelectedOption</option>
+          <option name="appendTextField" />
+          <option name="appendPositionComboBox">endValue</option>
+          <option name="removeHowMuchIntegerOption">1</option>
+          <option name="removePositionComboBox">endValue</option>
+        </childOption>
+        <childOption name="advancedSuperOptions">
+          <option name="replaceWhatTypeRadioOption">matchesOption</option>
+          <option name="replaceWhatTextField">^.[^0-9.][a-z.\s]*|(\s?[(].*?[)]|\s)$</option>
+          <option name="ignoreCaseCheckbox">false</option>
+          <option name="isRegexCheckbox">true</option>
+          <option name="replaceWithTextField" />
+          <option name="plusButton">Add Property...</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="advancedCheckbox" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementForEach" />
+    <workflowElement id="com.biomatters.plugins.alignment.AssemblyOperation_Reference" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="displayForCloningValidation">false</option>
+        <option name="assemblerId">Minimap2_Biomatters</option>
+        <option name="assemblerVersion">2.2.0</option>
+        <option name="assemblyNamePrefixOrFolder">&lt;font color='red'&gt;No Documents&lt;/font&gt; </option>
+        <childOption name="data">
+          <option name="reassemble">true</option>
+          <option name="useReferenceSequence">true</option>
+          <option name="referenceSequenceName">urn:local:.:1d-jgvlz9r</option>
+          <option name="customComponent1" />
+          <option name="customComponent2" />
+          <option name="customComponent3" />
+          <option name="assembleByDocumentFields">false</option>
+          <option name="groupAssemblies">false</option>
+          <option name="namePart">0</option>
+          <option name="nameSeparator" extra="">- (Hyphen)</option>
+          <option name="customComponent4" />
+          <option name="assembleListsSeparately">false</option>
+        </childOption>
+        <childOption name="method">
+          <childOption name="algorithm">
+            <option name="deNovoAssembly">dummy</option>
+            <option name="customComponent1" />
+            <option name="referenceAssembly">Minimap2_Biomatters</option>
+            <option name="customComponent2" />
+            <option name="customComponent3" />
+          </childOption>
+          <childOption name="StarRnaSeqAligner" />
+          <childOption name="bowtie2">
+            <option name="type">global</option>
+            <option name="preset">true</option>
+            <option name="sensitivity">sensitive</option>
+            <childOption name="normal">
+              <option name="packRef">false</option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
+            </childOption>
+            <childOption name="algorithmOptions">
+              <option name="multiThreading">true</option>
+              <option name="misMatchSeed">0</option>
+              <option name="seedLength">22</option>
+              <option name="minInsertMatch">0</option>
+              <option name="maxInsertMatch">800</option>
+            </childOption>
+            <childOption name="reporting">
+              <option name="reporting">best</option>
+              <option name="reportUpTo">5</option>
+            </childOption>
+          </childOption>
+          <childOption name="Minimap2_Biomatters">
+            <childOption name="options">
+              <option name="-x">map-ont --frag=yes</option>
+              <option name="kmerCheck">false</option>
+              <option name="-k">15</option>
+              <option name="additionalOptions" />
+              <option name="--secondary=yes">false</option>
+              <childOption name="Include Secondary Alignments">
+                <option name="-N">5</option>
+                <option name="-p">0.8</option>
+              </childOption>
+            </childOption>
+          </childOption>
+          <childOption name="bowtie">
+            <childOption name="normal">
+              <option name="packRef">false</option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
+            </childOption>
+            <childOption name="algorithmOptions">
+              <option name="multiThreading">true</option>
+              <option name="misMatchSeed">2</option>
+              <option name="seedLength">28</option>
+              <option name="minInsertMatch">0</option>
+              <option name="maxInsertMatch">800</option>
+            </childOption>
+            <childOption name="reporting">
+              <option name="reporting">best</option>
+              <option name="reportUpTo">5</option>
+            </childOption>
+          </childOption>
+          <childOption name="Geneious.reference">
+            <option name="sensitivity">medium</option>
+            <option name="customComponent1" />
+            <option name="findStructuralVariants">false</option>
+            <option name="customComponent2" />
+            <option name="findDeletions">false</option>
+            <option name="maximumDeletionSize">1000</option>
+            <option name="fineTune">iterate_5</option>
+            <option name="customComponent3" />
+            <option name="customComponent4" />
+            <option name="expansionWordLength">14</option>
+            <option name="indexWordLength">12</option>
+            <option name="filterRepeatsReference">true</option>
+            <option name="filterRepeatsSizeReference">20</option>
+            <option name="allowGaps">true</option>
+            <option name="maxGapsPerRead">15</option>
+            <option name="maxGapSize">50</option>
+            <option name="maxMismatches">30</option>
+            <option name="maxAmbiguity">4</option>
+            <option name="applyMinOverlap">false</option>
+            <option name="minOverlap">25</option>
+            <option name="applyMinOverlapPercentageIdentical">false</option>
+            <option name="minOverlapPercentageIdentical">80</option>
+            <option name="doMoreThoroughSearching">false</option>
+            <option name="multipleBestMatches">mapRandomly</option>
+            <option name="applyMinimumMappingQuality">false</option>
+            <option name="minimumMappingQuality">30</option>
+            <option name="accuratelyMapReadsWithErrorsToRepeatRegions">true</option>
+            <option name="trimPairedOverhangs">true</option>
+            <option name="includeInsertionsInStructuralVariants">true</option>
+            <option name="minimumJunctionSupport">2</option>
+            <option name="reanalyzeSequencesThreshold">8</option>
+            <option name="onlyUsePairedHitsDeNovo">false</option>
+            <option name="onlyMapPairedHitsReference">false</option>
+            <option name="onlyMapPairedHitsReferenceCombobox">mapNearby</option>
+          </childOption>
+          <childOption name="GeneiousRNA.reference">
+            <option name="sensitivity">medium</option>
+            <option name="customComponent1" />
+            <option name="RNASeqMethod">spanAnnotations</option>
+            <option name="intronType">mRNA</option>
+            <option name="maximumNovelIntronSize">500000</option>
+            <option name="customComponent2" />
+            <option name="fineTune">iterate_5</option>
+            <option name="customComponent3" />
+            <option name="expansionWordLength">14</option>
+            <option name="indexWordLength">12</option>
+            <option name="filterRepeatsReference">true</option>
+            <option name="filterRepeatsSizeReference">20</option>
+            <option name="allowGaps">true</option>
+            <option name="maxGapsPerRead">15</option>
+            <option name="maxGapSize">50</option>
+            <option name="maxMismatches">30</option>
+            <option name="maxAmbiguity">4</option>
+            <option name="applyMinOverlap">false</option>
+            <option name="minOverlap">25</option>
+            <option name="applyMinOverlapPercentageIdentical">false</option>
+            <option name="minOverlapPercentageIdentical">80</option>
+            <option name="doMoreThoroughSearching">false</option>
+            <option name="multipleBestMatches">mapRandomly</option>
+            <option name="applyMinimumMappingQuality">false</option>
+            <option name="minimumMappingQuality">30</option>
+            <option name="accuratelyMapReadsWithErrorsToRepeatRegions">true</option>
+            <option name="trimPairedOverhangs">true</option>
+            <option name="includeInsertionsInStructuralVariants">true</option>
+            <option name="minimumJunctionSupport">2</option>
+            <option name="reanalyzeSequencesThreshold">8</option>
+            <option name="onlyUsePairedHitsDeNovo">false</option>
+            <option name="onlyMapPairedHitsReference">false</option>
+            <option name="onlyMapPairedHitsReferenceCombobox">mapNearby</option>
+          </childOption>
+          <childOption name="BBMap">
+            <option name="sensitivity">normal</option>
+            <option name="multipleBestMatches">random</option>
+            <option name="kmer">13</option>
+            <option name="maximumIndelSize">16000</option>
+            <option name="usemodulo">false</option>
+            <option name="pacBio">false</option>
+            <option name="memoryToAllocate">111000</option>
+            <option name="additionalOptions" />
+            <option name="customComponent1" />
+          </childOption>
+        </childOption>
+        <childOption name="trimOptions">
+          <option name="method">noTrim</option>
+          <option name="trimOptionsButton">Options</option>
+          <option name="customComponent1" />
+          <childOption name="trimOptions">
+            <option name="action">annotate</option>
+            <childOption name="vectorTrim">
+              <option name="vectorScreening">false</option>
+              <option name="minHit">16</option>
+              <multiOption name="vectorDatabaseOption">
+                <value>
+                  <option name="vectorDatabaseOption">UniVec</option>
+                </value>
+              </multiOption>
+            </childOption>
+            <childOption name="primerTrim">
+              <option name="primerScreening">false</option>
+              <childOption name="primerTrim">
+                <option name="primers" />
+                <option name="allowMismatches">true</option>
+                <option name="maxMismatches">5</option>
+                <option name="minLength">5</option>
+              </childOption>
+            </childOption>
+            <childOption name="errorProbability">
+              <option name="errorProbability">true</option>
+              <option name="errorLimit">0.05</option>
+            </childOption>
+            <childOption name="lowQualityTrim">
+              <option name="lowQuality">false</option>
+              <option name="lowQualityLimit">0</option>
+            </childOption>
+            <childOption name="ambiguityTrim">
+              <option name="ambiguity">false</option>
+              <option name="ambiguityLimit">2</option>
+            </childOption>
+            <childOption name="trimStart">
+              <option name="startTrim">true</option>
+              <option name="startTrimAtLeast">false</option>
+              <option name="startTrimMinimum">0</option>
+            </childOption>
+            <childOption name="trimEnd">
+              <option name="endTrim">true</option>
+              <option name="endTrimAtLeast">false</option>
+              <option name="endTrimMinimum">0</option>
+            </childOption>
+            <childOption name="minLength">
+              <option name="use">false</option>
+              <option name="minLength">20</option>
+            </childOption>
+            <childOption name="maxLength">
+              <option name="use">false</option>
+              <option name="maxLength">1000</option>
+            </childOption>
+          </childOption>
+        </childOption>
+        <childOption name="results">
+          <option name="nameDeNovo">{Reads Name} Assembly</option>
+          <option name="addNameVariableDeNovo">...</option>
+          <option name="nameReference">{Reads Name}</option>
+          <option name="addNameVariableReference">...</option>
+          <option name="saveReport">true</option>
+          <option name="customComponent1" />
+          <option name="saveUnusedReads">true</option>
+          <option name="customComponent2" />
+          <option name="saveUsedReads">false</option>
+          <option name="saveUsedReadsIncludeMates">false</option>
+          <option name="customComponent3" />
+          <option name="resultsInSubfolder">false</option>
+          <option name="customComponent4" />
+          <option name="generateContigs">true</option>
+          <option name="limitGeneratedContigs">true</option>
+          <option name="generatedContigsLimit">1000</option>
+          <option name="saveConsensusSequencesAsList">true</option>
+          <option name="customComponent5" />
+          <option name="generateConsensusSequencesReference">false</option>
+          <option name="consensusOptionsButtonReference">Options</option>
+          <option name="customComponent6" />
+          <option name="customComponent7" />
+          <option name="generateConsensusSequencesDeNovo">true</option>
+          <option name="consensusOptionsButtonDeNovo">Options</option>
+          <option name="customComponent8" />
+          <option name="customComponent9" />
+          <childOption name="consensus">
+            <option name="consensusSource">generateFromContig</option>
+            <childOption name="consensusOptionsReference">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+            <childOption name="consensusOptionsDeNovo">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+          </childOption>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="displayForCloningValidation" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">1_minimap_spa</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">filterDocumentTypeField</option>
+            <option name="condition">is</option>
+            <option name="value">Contig</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="advancedCheckbox">true</option>
+        <option name="customComponent1" />
+        <childOption name="renameMethodChildOptions">
+          <option name="selectedRenameMethod">renamableOption2</option>
+          <childOption name="BatchRenameSubOptions0">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="startBatchIndexOption">0</option>
+            <option name="endBatchIndexInclusiveOption">2147483647</option>
+            <option name="sequencesInSequenceListDocumentRenamableSequenceType">allSequencesInListOption</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions1">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="followAndRenameReferences">true</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions2">
+            <option name="selectedFieldComboOption">fieldOptioncache_name</option>
+          </childOption>
+        </childOption>
+        <childOption name="basicSuperOptions">
+          <option name="task">replaceWithRadioButton</option>
+          <option name="r1">fieldOptioncache_name</option>
+          <option name="rSep" />
+          <option name="r2">nothingSelectedOption</option>
+          <option name="rSep2" />
+          <option name="r3">nothingSelectedOption</option>
+          <option name="appendTextField" />
+          <option name="appendPositionComboBox">endValue</option>
+          <option name="removeHowMuchIntegerOption">1</option>
+          <option name="removePositionComboBox">endValue</option>
+        </childOption>
+        <childOption name="advancedSuperOptions">
+          <option name="replaceWhatTypeRadioOption">matchesOption</option>
+          <option name="replaceWhatTextField"> </option>
+          <option name="ignoreCaseCheckbox">true</option>
+          <option name="isRegexCheckbox">false</option>
+          <option name="replaceWithTextField">_</option>
+          <option name="plusButton">Add Property...</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="advancedCheckbox" label="" />
+    </workflowElement>
+    <workflowElement id="com.biomatters.plugins.alignment.AssemblyOperation_Denovo" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="displayForCloningValidation">false</option>
+        <option name="assemblerId">Geneious.deNovo</option>
+        <option name="assemblerVersion">2024.0.7</option>
+        <option name="assemblyNamePrefixOrFolder">&lt;font color='red'&gt;No Documents&lt;/font&gt; </option>
+        <childOption name="data">
+          <option name="reassemble">true</option>
+          <option name="useReferenceSequence">false</option>
+          <option name="customComponent1" />
+          <option name="assembleByDocumentFields">false</option>
+          <option name="groupAssemblies">false</option>
+          <option name="namePart">0</option>
+          <option name="nameSeparator" extra="">- (Hyphen)</option>
+          <option name="customComponent2" />
+          <option name="assembleListsSeparately">false</option>
+          <option name="assemblePairsSeparately">false</option>
+          <option name="usePartialData">false</option>
+          <option name="partialDataPercentageNew">50.0</option>
+        </childOption>
+        <childOption name="method">
+          <childOption name="algorithm">
+            <option name="deNovoAssembly">Geneious.deNovo</option>
+            <option name="customComponent1" />
+            <option name="referenceAssembly">dummy</option>
+            <option name="customComponent2" />
+            <option name="customComponent3" />
+          </childOption>
+          <childOption name="biomatters.spades">
+            <option name="dnaSource">multiCell</option>
+            <option name="customComponent1" />
+            <option name="method">errorCorrectAndAssemble</option>
+            <option name="careful">true</option>
+            <option name="trustedContigs" />
+            <option name="customComponent2" />
+            <option name="untrustedContigs" />
+            <option name="customComponent3" />
+            <option name="overrideKmer">false</option>
+            <option name="kmers">21,33,55</option>
+            <option name="overrideThreads">false</option>
+            <option name="numberOfThreads">32</option>
+            <option name="maxMemory">126</option>
+            <option name="additionalOptions" />
+            <option name="customComponent4" />
+          </childOption>
+          <childOption name="Geneious.deNovo">
+            <option name="sensitivity">custom</option>
+            <option name="customComponent1" />
+            <option name="fineTune">iterate_5</option>
+            <option name="customComponent2" />
+            <option name="memoryVsSpeed">5</option>
+            <option name="expansionWordLength">24</option>
+            <option name="indexWordLength">14</option>
+            <option name="filterRepeatsdeNovo">true</option>
+            <option name="filterRepeatsSizedeNovo">200</option>
+            <option name="allowGaps">true</option>
+            <option name="maxGapsPerRead">1</option>
+            <option name="maxGapSize">1</option>
+            <option name="maxMismatches">0</option>
+            <option name="maxAmbiguity">4</option>
+            <option name="applyMinOverlap">true</option>
+            <option name="minOverlap">150</option>
+            <option name="applyMinOverlapPercentageIdentical">true</option>
+            <option name="minOverlapPercentageIdentical">100</option>
+            <option name="doMoreThoroughSearching">false</option>
+            <option name="multipleBestMatches">mapRandomly</option>
+            <option name="applyMinimumMappingQuality">false</option>
+            <option name="minimumMappingQuality">30</option>
+            <option name="reanalyzeSequencesThreshold">16</option>
+            <option name="onlyUsePairedHitsDeNovo">false</option>
+            <option name="onlyMapPairedHitsReference">false</option>
+            <option name="onlyMapPairedHitsReferenceCombobox">mapNearby</option>
+            <option name="dontMergeVariantContigs">false</option>
+            <option name="dontMergeVariantContigsMaxCoverage">6</option>
+            <option name="mergeHomopolymerVariants">true</option>
+            <option name="allowCircularContigs">false</option>
+            <option name="minimumSequencesToCircularizeContig">3</option>
+            <option name="produceScaffolds">false</option>
+            <option name="linkShortOverlaps">true</option>
+            <option name="useMultipleThreads">true</option>
+          </childOption>
+          <childOption name="Tadpole">
+            <option name="kmer">31</option>
+            <option name="customComponent1" />
+            <option name="doPairedReadOverlap">false</option>
+            <option name="pairedReadOverlap">mergePairedReads</option>
+            <option name="minimumContigLength">200</option>
+            <option name="minimumCoverage">1</option>
+            <option name="minimumExtension">1</option>
+            <option name="memoryToAllocate">111000</option>
+            <option name="additionalOptions" />
+            <option name="customComponent2" />
+          </childOption>
+          <childOption name="VelvetAssemblyAlgorithm">
+            <option name="method">manualVelvetOptions</option>
+            <option name="useMultithreading">false</option>
+            <childOption name="manualVelvetOptions">
+              <option name="divider_1" />
+              <option name="hashLength">67</option>
+              <option name="isStrandSpecific">false</option>
+              <option name="divider_2" />
+              <option name="useCovCutoff">false</option>
+              <option name="useAutoCovCutoff">true</option>
+              <option name="covCutoff">0.0</option>
+              <option name="useMaxCovCutoff">false</option>
+              <option name="maxCovCutoff">200.0</option>
+              <option name="useExpCov">false</option>
+              <option name="expCov">1.0</option>
+              <option name="minContigLength">134</option>
+              <option name="allowScaffolding">true</option>
+            </childOption>
+            <childOption name="optVelvetOptions">
+              <option name="customComponent1" />
+              <option name="optMinHashLength">63</option>
+              <option name="optMaxHashLength">71</option>
+              <option name="helpButton" />
+              <option name="divider_1" />
+              <option name="optFuncKmer">n50</option>
+              <option name="optFuncCov">Lbp</option>
+            </childOption>
+          </childOption>
+          <childOption name="MiraAssembler">
+            <option name="sequenceType">genome</option>
+            <option name="level">accurate</option>
+            <option name="customComponent1" />
+            <option name="solexa">true</option>
+            <option name="iontor">true</option>
+            <option name="454">true</option>
+            <option name="sanger">true</option>
+            <option name="pcbiohq">true</option>
+            <option name="failWithHighCoverage">true</option>
+            <option name="failWithCoverageOver">80</option>
+            <option name="customComponent2" />
+            <option name="removeTrimAnnotationsFromResults">false</option>
+            <option name="parameters" />
+            <option name="customComponent3" />
+          </childOption>
+          <childOption name="Cap3Assembler">
+            <option name="EXE" />
+            <option name="customComponent1" />
+            <option name="divider_1" />
+            <option name="o">40</option>
+            <option name="p">90</option>
+            <childOption name="left">
+              <option name="a">20</option>
+              <option name="c">12</option>
+              <option name="e">30</option>
+              <option name="g">6</option>
+              <option name="i">40</option>
+              <option name="k">1</option>
+              <option name="n">-5</option>
+              <option name="s">900</option>
+              <option name="u">3</option>
+              <option name="w">100</option>
+            </childOption>
+            <childOption name="right">
+              <option name="b">20</option>
+              <option name="d">200</option>
+              <option name="f">20</option>
+              <option name="h">20</option>
+              <option name="j">80</option>
+              <option name="m">2</option>
+              <option name="r">1</option>
+              <option name="t">300</option>
+              <option name="v">2</option>
+              <option name="z">3</option>
+            </childOption>
+          </childOption>
+          <childOption name="Flye_Biomatters">
+            <childOption name="options">
+              <option name="dataType">--pacbio-raw</option>
+              <option name="--genome-size">5m</option>
+              <option name="--meta">false</option>
+              <option name="--keep-haplotypes">false</option>
+              <option name="--asmCoverageEnable">false</option>
+              <option name="--asm-coverage">30</option>
+              <option name="--min-overlap-enable">false</option>
+              <option name="--min-overlap">3000</option>
+              <option name="--iterations">1</option>
+              <option name="--plasmids">false</option>
+              <option name="additionalOptions" />
+            </childOption>
+          </childOption>
+        </childOption>
+        <childOption name="trimOptions">
+          <option name="method">useExistingRemove</option>
+          <option name="trimOptionsButton">Options</option>
+          <option name="customComponent1" />
+          <childOption name="trimOptions">
+            <option name="action">annotate</option>
+            <childOption name="vectorTrim">
+              <option name="vectorScreening">false</option>
+              <option name="minHit">16</option>
+              <multiOption name="vectorDatabaseOption">
+                <value>
+                  <option name="vectorDatabaseOption">UniVec</option>
+                </value>
+              </multiOption>
+            </childOption>
+            <childOption name="primerTrim">
+              <option name="primerScreening">false</option>
+              <childOption name="primerTrim">
+                <option name="primers" />
+                <option name="allowMismatches">true</option>
+                <option name="maxMismatches">5</option>
+                <option name="minLength">5</option>
+              </childOption>
+            </childOption>
+            <childOption name="errorProbability">
+              <option name="errorProbability">true</option>
+              <option name="errorLimit">0.05</option>
+            </childOption>
+            <childOption name="lowQualityTrim">
+              <option name="lowQuality">false</option>
+              <option name="lowQualityLimit">0</option>
+            </childOption>
+            <childOption name="ambiguityTrim">
+              <option name="ambiguity">false</option>
+              <option name="ambiguityLimit">2</option>
+            </childOption>
+            <childOption name="trimStart">
+              <option name="startTrim">true</option>
+              <option name="startTrimAtLeast">false</option>
+              <option name="startTrimMinimum">0</option>
+            </childOption>
+            <childOption name="trimEnd">
+              <option name="endTrim">true</option>
+              <option name="endTrimAtLeast">false</option>
+              <option name="endTrimMinimum">0</option>
+            </childOption>
+            <childOption name="minLength">
+              <option name="use">false</option>
+              <option name="minLength">20</option>
+            </childOption>
+            <childOption name="maxLength">
+              <option name="use">false</option>
+              <option name="maxLength">1000</option>
+            </childOption>
+          </childOption>
+        </childOption>
+        <childOption name="results">
+          <option name="nameDeNovo">{Reads Name}</option>
+          <option name="addNameVariableDeNovo">...</option>
+          <option name="nameReference">{Reads Name} assembled to {Reference Name}</option>
+          <option name="addNameVariableReference">...</option>
+          <option name="saveReport">true</option>
+          <option name="customComponent1" />
+          <option name="saveUnusedReads">false</option>
+          <option name="customComponent2" />
+          <option name="resultsInSubfolder">false</option>
+          <option name="customComponent3" />
+          <option name="generateContigs">true</option>
+          <option name="limitGeneratedContigs">true</option>
+          <option name="generatedContigsLimit">5</option>
+          <option name="saveConsensusSequencesAsList">true</option>
+          <option name="customComponent4" />
+          <option name="generateConsensusSequencesReference">false</option>
+          <option name="consensusOptionsButtonReference">Options</option>
+          <option name="customComponent5" />
+          <option name="customComponent6" />
+          <option name="generateConsensusSequencesDeNovo">true</option>
+          <option name="consensusOptionsButtonDeNovo">Options</option>
+          <option name="customComponent7" />
+          <option name="customComponent8" />
+          <childOption name="consensus">
+            <option name="consensusSource">assemblyAlgorithm</option>
+            <childOption name="consensusOptionsReference">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+            <childOption name="consensusOptionsDeNovo">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+          </childOption>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="displayForCloningValidation" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">2_spa_de_novo</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="true" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">filterDocumentTypeField</option>
+            <option name="condition">contains</option>
+            <option name="value">list</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="Randomly Sample Sequences_7b9d9b9e-7582-45b4-a8c2-53d322549cee" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="divider_1" />
+        <childOption name="0">
+          <option name="numberOfSampleSets">1</option>
+          <option name="sequencesPerSet">1</option>
+          <option name="useFirstSequences">true</option>
+          <option name="randomSeed">0</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="divider_1" label="" />
+    </workflowElement>
+    <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="advancedCheckbox">true</option>
+        <option name="customComponent1" />
+        <childOption name="renameMethodChildOptions">
+          <option name="selectedRenameMethod">renamableOption2</option>
+          <childOption name="BatchRenameSubOptions0">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="startBatchIndexOption">0</option>
+            <option name="endBatchIndexInclusiveOption">2147483647</option>
+            <option name="sequencesInSequenceListDocumentRenamableSequenceType">allSequencesInListOption</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions1">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="followAndRenameReferences">true</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions2">
+            <option name="selectedFieldComboOption">fieldOptioncache_name</option>
+          </childOption>
+        </childOption>
+        <childOption name="basicSuperOptions">
+          <option name="task">replaceWithRadioButton</option>
+          <option name="r1">fieldOptioncache_name</option>
+          <option name="rSep" />
+          <option name="r2">nothingSelectedOption</option>
+          <option name="rSep2" />
+          <option name="r3">nothingSelectedOption</option>
+          <option name="appendTextField" />
+          <option name="appendPositionComboBox">endValue</option>
+          <option name="removeHowMuchIntegerOption">1</option>
+          <option name="removePositionComboBox">endValue</option>
+        </childOption>
+        <childOption name="advancedSuperOptions">
+          <option name="replaceWhatTypeRadioOption">matchesOption</option>
+          <option name="replaceWhatTextField"> </option>
+          <option name="ignoreCaseCheckbox">true</option>
+          <option name="isRegexCheckbox">false</option>
+          <option name="replaceWithTextField">_</option>
+          <option name="plusButton">Add Property...</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="advancedCheckbox" label="" />
+    </workflowElement>
+    <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="advancedCheckbox">true</option>
+        <option name="customComponent1" />
+        <childOption name="renameMethodChildOptions">
+          <option name="selectedRenameMethod">renamableOption2</option>
+          <childOption name="BatchRenameSubOptions0">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="startBatchIndexOption">0</option>
+            <option name="endBatchIndexInclusiveOption">2147483647</option>
+            <option name="sequencesInSequenceListDocumentRenamableSequenceType">allSequencesInListOption</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions1">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="followAndRenameReferences">true</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions2">
+            <option name="selectedFieldComboOption">fieldOptioncache_name</option>
+          </childOption>
+        </childOption>
+        <childOption name="basicSuperOptions">
+          <option name="task">replaceWithRadioButton</option>
+          <option name="r1">fieldOptioncache_name</option>
+          <option name="rSep" />
+          <option name="r2">nothingSelectedOption</option>
+          <option name="rSep2" />
+          <option name="r3">nothingSelectedOption</option>
+          <option name="appendTextField" />
+          <option name="appendPositionComboBox">endValue</option>
+          <option name="removeHowMuchIntegerOption">1</option>
+          <option name="removePositionComboBox">endValue</option>
+        </childOption>
+        <childOption name="advancedSuperOptions">
+          <option name="replaceWhatTypeRadioOption">matchesOption</option>
+          <option name="replaceWhatTextField">(^1_sequences_from_)(\S+)(_Consensus_Sequences$)</option>
+          <option name="ignoreCaseCheckbox">false</option>
+          <option name="isRegexCheckbox">true</option>
+          <option name="replaceWithTextField">{match[2]}</option>
+          <option name="plusButton">Add Property...</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="advancedCheckbox" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">3_input_spatyper</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="spatyper_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">4_spatyper</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">false</option>
+        <option name="subFolderName" />
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">branchFrom</option>
+        <option name="back">12</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">cache_name</option>
+            <option name="condition">contains</option>
+            <option name="value">Unused reads</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="com.biomatters.plugins.alignment.AssemblyOperation_Reference" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="displayForCloningValidation">false</option>
+        <option name="assemblerId">Minimap2_Biomatters</option>
+        <option name="assemblerVersion">2.2.0</option>
+        <option name="assemblyNamePrefixOrFolder">&lt;font color='red'&gt;No Documents&lt;/font&gt; </option>
+        <childOption name="data">
+          <option name="reassemble">true</option>
+          <option name="useReferenceSequence">true</option>
+          <option name="referenceSequenceName">urn:local:.:1b-jgvlz9r</option>
+          <option name="customComponent1" />
+          <option name="customComponent2" />
+          <option name="customComponent3" />
+          <option name="assembleByDocumentFields">false</option>
+          <option name="groupAssemblies">false</option>
+          <option name="namePart">0</option>
+          <option name="nameSeparator" extra="">- (Hyphen)</option>
+          <option name="customComponent4" />
+          <option name="assembleListsSeparately">false</option>
+        </childOption>
+        <childOption name="method">
+          <childOption name="algorithm">
+            <option name="deNovoAssembly">dummy</option>
+            <option name="customComponent1" />
+            <option name="referenceAssembly">Minimap2_Biomatters</option>
+            <option name="customComponent2" />
+            <option name="customComponent3" />
+          </childOption>
+          <childOption name="StarRnaSeqAligner" />
+          <childOption name="bowtie2">
+            <option name="type">global</option>
+            <option name="preset">true</option>
+            <option name="sensitivity">sensitive</option>
+            <childOption name="normal">
+              <option name="packRef">false</option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
+            </childOption>
+            <childOption name="algorithmOptions">
+              <option name="multiThreading">true</option>
+              <option name="misMatchSeed">0</option>
+              <option name="seedLength">22</option>
+              <option name="minInsertMatch">0</option>
+              <option name="maxInsertMatch">800</option>
+            </childOption>
+            <childOption name="reporting">
+              <option name="reporting">best</option>
+              <option name="reportUpTo">5</option>
+            </childOption>
+          </childOption>
+          <childOption name="Minimap2_Biomatters">
+            <childOption name="options">
+              <option name="-x">map-ont --frag=yes</option>
+              <option name="kmerCheck">false</option>
+              <option name="-k">15</option>
+              <option name="additionalOptions" />
+              <option name="--secondary=yes">false</option>
+              <childOption name="Include Secondary Alignments">
+                <option name="-N">5</option>
+                <option name="-p">0.8</option>
+              </childOption>
+            </childOption>
+          </childOption>
+          <childOption name="bowtie">
+            <childOption name="normal">
+              <option name="packRef">false</option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
+            </childOption>
+            <childOption name="algorithmOptions">
+              <option name="multiThreading">true</option>
+              <option name="misMatchSeed">2</option>
+              <option name="seedLength">28</option>
+              <option name="minInsertMatch">0</option>
+              <option name="maxInsertMatch">800</option>
+            </childOption>
+            <childOption name="reporting">
+              <option name="reporting">best</option>
+              <option name="reportUpTo">5</option>
+            </childOption>
+          </childOption>
+          <childOption name="Geneious.reference">
+            <option name="sensitivity">medium</option>
+            <option name="customComponent1" />
+            <option name="findStructuralVariants">false</option>
+            <option name="customComponent2" />
+            <option name="findDeletions">false</option>
+            <option name="maximumDeletionSize">1000</option>
+            <option name="fineTune">iterate_5</option>
+            <option name="customComponent3" />
+            <option name="customComponent4" />
+            <option name="expansionWordLength">14</option>
+            <option name="indexWordLength">12</option>
+            <option name="filterRepeatsReference">true</option>
+            <option name="filterRepeatsSizeReference">20</option>
+            <option name="allowGaps">true</option>
+            <option name="maxGapsPerRead">15</option>
+            <option name="maxGapSize">50</option>
+            <option name="maxMismatches">30</option>
+            <option name="maxAmbiguity">4</option>
+            <option name="applyMinOverlap">false</option>
+            <option name="minOverlap">25</option>
+            <option name="applyMinOverlapPercentageIdentical">false</option>
+            <option name="minOverlapPercentageIdentical">80</option>
+            <option name="doMoreThoroughSearching">false</option>
+            <option name="multipleBestMatches">mapRandomly</option>
+            <option name="applyMinimumMappingQuality">false</option>
+            <option name="minimumMappingQuality">30</option>
+            <option name="accuratelyMapReadsWithErrorsToRepeatRegions">true</option>
+            <option name="trimPairedOverhangs">true</option>
+            <option name="includeInsertionsInStructuralVariants">true</option>
+            <option name="minimumJunctionSupport">2</option>
+            <option name="reanalyzeSequencesThreshold">8</option>
+            <option name="onlyUsePairedHitsDeNovo">false</option>
+            <option name="onlyMapPairedHitsReference">false</option>
+            <option name="onlyMapPairedHitsReferenceCombobox">mapNearby</option>
+          </childOption>
+          <childOption name="GeneiousRNA.reference">
+            <option name="sensitivity">medium</option>
+            <option name="customComponent1" />
+            <option name="RNASeqMethod">spanAnnotations</option>
+            <option name="intronType">mRNA</option>
+            <option name="maximumNovelIntronSize">500000</option>
+            <option name="customComponent2" />
+            <option name="fineTune">iterate_5</option>
+            <option name="customComponent3" />
+            <option name="expansionWordLength">14</option>
+            <option name="indexWordLength">12</option>
+            <option name="filterRepeatsReference">true</option>
+            <option name="filterRepeatsSizeReference">20</option>
+            <option name="allowGaps">true</option>
+            <option name="maxGapsPerRead">15</option>
+            <option name="maxGapSize">50</option>
+            <option name="maxMismatches">30</option>
+            <option name="maxAmbiguity">4</option>
+            <option name="applyMinOverlap">false</option>
+            <option name="minOverlap">25</option>
+            <option name="applyMinOverlapPercentageIdentical">false</option>
+            <option name="minOverlapPercentageIdentical">80</option>
+            <option name="doMoreThoroughSearching">false</option>
+            <option name="multipleBestMatches">mapRandomly</option>
+            <option name="applyMinimumMappingQuality">false</option>
+            <option name="minimumMappingQuality">30</option>
+            <option name="accuratelyMapReadsWithErrorsToRepeatRegions">true</option>
+            <option name="trimPairedOverhangs">true</option>
+            <option name="includeInsertionsInStructuralVariants">true</option>
+            <option name="minimumJunctionSupport">2</option>
+            <option name="reanalyzeSequencesThreshold">8</option>
+            <option name="onlyUsePairedHitsDeNovo">false</option>
+            <option name="onlyMapPairedHitsReference">false</option>
+            <option name="onlyMapPairedHitsReferenceCombobox">mapNearby</option>
+          </childOption>
+          <childOption name="BBMap">
+            <option name="sensitivity">normal</option>
+            <option name="multipleBestMatches">random</option>
+            <option name="kmer">13</option>
+            <option name="maximumIndelSize">16000</option>
+            <option name="usemodulo">false</option>
+            <option name="pacBio">false</option>
+            <option name="memoryToAllocate">111000</option>
+            <option name="additionalOptions" />
+            <option name="customComponent1" />
+          </childOption>
+        </childOption>
+        <childOption name="trimOptions">
+          <option name="method">noTrim</option>
+          <option name="trimOptionsButton">Options</option>
+          <option name="customComponent1" />
+          <childOption name="trimOptions">
+            <option name="action">annotate</option>
+            <childOption name="vectorTrim">
+              <option name="vectorScreening">false</option>
+              <option name="minHit">16</option>
+              <multiOption name="vectorDatabaseOption">
+                <value>
+                  <option name="vectorDatabaseOption">UniVec</option>
+                </value>
+              </multiOption>
+            </childOption>
+            <childOption name="primerTrim">
+              <option name="primerScreening">false</option>
+              <childOption name="primerTrim">
+                <option name="primers" />
+                <option name="allowMismatches">true</option>
+                <option name="maxMismatches">5</option>
+                <option name="minLength">5</option>
+              </childOption>
+            </childOption>
+            <childOption name="errorProbability">
+              <option name="errorProbability">true</option>
+              <option name="errorLimit">0.05</option>
+            </childOption>
+            <childOption name="lowQualityTrim">
+              <option name="lowQuality">false</option>
+              <option name="lowQualityLimit">0</option>
+            </childOption>
+            <childOption name="ambiguityTrim">
+              <option name="ambiguity">false</option>
+              <option name="ambiguityLimit">2</option>
+            </childOption>
+            <childOption name="trimStart">
+              <option name="startTrim">true</option>
+              <option name="startTrimAtLeast">false</option>
+              <option name="startTrimMinimum">0</option>
+            </childOption>
+            <childOption name="trimEnd">
+              <option name="endTrim">true</option>
+              <option name="endTrimAtLeast">false</option>
+              <option name="endTrimMinimum">0</option>
+            </childOption>
+            <childOption name="minLength">
+              <option name="use">false</option>
+              <option name="minLength">20</option>
+            </childOption>
+            <childOption name="maxLength">
+              <option name="use">false</option>
+              <option name="maxLength">1000</option>
+            </childOption>
+          </childOption>
+        </childOption>
+        <childOption name="results">
+          <option name="nameDeNovo">{Reads Name} Assembly</option>
+          <option name="addNameVariableDeNovo">...</option>
+          <option name="nameReference">{Reads Name}</option>
+          <option name="addNameVariableReference">...</option>
+          <option name="saveReport">true</option>
+          <option name="customComponent1" />
+          <option name="saveUnusedReads">true</option>
+          <option name="customComponent2" />
+          <option name="saveUsedReads">false</option>
+          <option name="saveUsedReadsIncludeMates">false</option>
+          <option name="customComponent3" />
+          <option name="resultsInSubfolder">false</option>
+          <option name="customComponent4" />
+          <option name="generateContigs">true</option>
+          <option name="limitGeneratedContigs">true</option>
+          <option name="generatedContigsLimit">1000</option>
+          <option name="saveConsensusSequencesAsList">true</option>
+          <option name="customComponent5" />
+          <option name="generateConsensusSequencesReference">false</option>
+          <option name="consensusOptionsButtonReference">Options</option>
+          <option name="customComponent6" />
+          <option name="customComponent7" />
+          <option name="generateConsensusSequencesDeNovo">true</option>
+          <option name="consensusOptionsButtonDeNovo">Options</option>
+          <option name="customComponent8" />
+          <option name="customComponent9" />
+          <childOption name="consensus">
+            <option name="consensusSource">generateFromContig</option>
+            <childOption name="consensusOptionsReference">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+            <childOption name="consensusOptionsDeNovo">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+          </childOption>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="displayForCloningValidation" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">5_minimap_mlst</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">filterDocumentTypeField</option>
+            <option name="condition">is</option>
+            <option name="value">Contig</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="ExtractNonReferenceSequencesOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
+    <workflowElement id="Randomly Sample Sequences_7b9d9b9e-7582-45b4-a8c2-53d322549cee" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="divider_1" />
+        <childOption name="0">
+          <option name="numberOfSampleSets">1</option>
+          <option name="sequencesPerSet">3500</option>
+          <option name="useFirstSequences">false</option>
+          <option name="randomSeed">0</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="divider_1" label="" />
+    </workflowElement>
+    <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="advancedCheckbox">true</option>
+        <option name="customComponent1" />
+        <childOption name="renameMethodChildOptions">
+          <option name="selectedRenameMethod">renamableOption2</option>
+          <childOption name="BatchRenameSubOptions0">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="startBatchIndexOption">0</option>
+            <option name="endBatchIndexInclusiveOption">2147483647</option>
+            <option name="sequencesInSequenceListDocumentRenamableSequenceType">allSequencesInListOption</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions1">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="followAndRenameReferences">true</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions2">
+            <option name="selectedFieldComboOption">fieldOptioncache_name</option>
+          </childOption>
+        </childOption>
+        <childOption name="basicSuperOptions">
+          <option name="task">replaceWithRadioButton</option>
+          <option name="r1">fieldOptioncache_name</option>
+          <option name="rSep" />
+          <option name="r2">nothingSelectedOption</option>
+          <option name="rSep2" />
+          <option name="r3">nothingSelectedOption</option>
+          <option name="appendTextField" />
+          <option name="appendPositionComboBox">endValue</option>
+          <option name="removeHowMuchIntegerOption">1</option>
+          <option name="removePositionComboBox">endValue</option>
+        </childOption>
+        <childOption name="advancedSuperOptions">
+          <option name="replaceWhatTypeRadioOption">matchesOption</option>
+          <option name="replaceWhatTextField"> </option>
+          <option name="ignoreCaseCheckbox">true</option>
+          <option name="isRegexCheckbox">false</option>
+          <option name="replaceWithTextField">_</option>
+          <option name="plusButton">Add Property...</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="advancedCheckbox" label="" />
+    </workflowElement>
+    <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="advancedCheckbox">true</option>
+        <option name="customComponent1" />
+        <childOption name="renameMethodChildOptions">
+          <option name="selectedRenameMethod">renamableOption2</option>
+          <childOption name="BatchRenameSubOptions0">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="startBatchIndexOption">0</option>
+            <option name="endBatchIndexInclusiveOption">2147483647</option>
+            <option name="sequencesInSequenceListDocumentRenamableSequenceType">allSequencesInListOption</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions1">
+            <option name="attributeProcedure">nameProcedure</option>
+            <option name="followAndRenameReferences">true</option>
+          </childOption>
+          <childOption name="BatchRenameSubOptions2">
+            <option name="selectedFieldComboOption">fieldOptioncache_name</option>
+          </childOption>
+        </childOption>
+        <childOption name="basicSuperOptions">
+          <option name="task">replaceWithRadioButton</option>
+          <option name="r1">fieldOptioncache_name</option>
+          <option name="rSep" />
+          <option name="r2">nothingSelectedOption</option>
+          <option name="rSep2" />
+          <option name="r3">nothingSelectedOption</option>
+          <option name="appendTextField" />
+          <option name="appendPositionComboBox">endValue</option>
+          <option name="removeHowMuchIntegerOption">1</option>
+          <option name="removePositionComboBox">endValue</option>
+        </childOption>
+        <childOption name="advancedSuperOptions">
+          <option name="replaceWhatTypeRadioOption">matchesOption</option>
+          <option name="replaceWhatTextField">(^\S{1,5}_sequences)(_from_)(\S+)(_sequences$)</option>
+          <option name="ignoreCaseCheckbox">false</option>
+          <option name="isRegexCheckbox">true</option>
+          <option name="replaceWithTextField">{match[3]}_{match[1]}</option>
+          <option name="plusButton">Add Property...</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="advancedCheckbox" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">6_mlst_reads_for_krocus</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="krocus_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">7_krocus</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">false</option>
+        <option name="subFolderName" />
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">branchFrom</option>
+        <option name="back">9</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">cache_name</option>
+            <option name="condition">contains</option>
+            <option name="value">Unused reads</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="com.biomatters.plugins.alignment.AssemblyOperation_Reference" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="displayForCloningValidation">false</option>
+        <option name="assemblerId">Minimap2_Biomatters</option>
+        <option name="assemblerVersion">2.2.0</option>
+        <option name="assemblyNamePrefixOrFolder">&lt;font color='red'&gt;No Documents&lt;/font&gt; </option>
+        <childOption name="data">
+          <option name="reassemble">true</option>
+          <option name="useReferenceSequence">true</option>
+          <option name="referenceSequenceName">urn:local:.:1c-jgvlz9r</option>
+          <option name="customComponent1" />
+          <option name="customComponent2" />
+          <option name="customComponent3" />
+          <option name="assembleByDocumentFields">false</option>
+          <option name="groupAssemblies">false</option>
+          <option name="namePart">0</option>
+          <option name="nameSeparator" extra="">- (Hyphen)</option>
+          <option name="customComponent4" />
+          <option name="assembleListsSeparately">false</option>
+        </childOption>
+        <childOption name="method">
+          <childOption name="algorithm">
+            <option name="deNovoAssembly">dummy</option>
+            <option name="customComponent1" />
+            <option name="referenceAssembly">Minimap2_Biomatters</option>
+            <option name="customComponent2" />
+            <option name="customComponent3" />
+          </childOption>
+          <childOption name="StarRnaSeqAligner" />
+          <childOption name="bowtie2">
+            <option name="type">global</option>
+            <option name="preset">true</option>
+            <option name="sensitivity">sensitive</option>
+            <childOption name="normal">
+              <option name="packRef">false</option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
+            </childOption>
+            <childOption name="algorithmOptions">
+              <option name="multiThreading">true</option>
+              <option name="misMatchSeed">0</option>
+              <option name="seedLength">22</option>
+              <option name="minInsertMatch">0</option>
+              <option name="maxInsertMatch">800</option>
+            </childOption>
+            <childOption name="reporting">
+              <option name="reporting">best</option>
+              <option name="reportUpTo">5</option>
+            </childOption>
+          </childOption>
+          <childOption name="Minimap2_Biomatters">
+            <childOption name="options">
+              <option name="-x">map-ont --frag=yes</option>
+              <option name="kmerCheck">false</option>
+              <option name="-k">15</option>
+              <option name="additionalOptions" />
+              <option name="--secondary=yes">false</option>
+              <childOption name="Include Secondary Alignments">
+                <option name="-N">5</option>
+                <option name="-p">0.8</option>
+              </childOption>
+            </childOption>
+          </childOption>
+          <childOption name="bowtie">
+            <childOption name="normal">
+              <option name="packRef">false</option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
+            </childOption>
+            <childOption name="algorithmOptions">
+              <option name="multiThreading">true</option>
+              <option name="misMatchSeed">2</option>
+              <option name="seedLength">28</option>
+              <option name="minInsertMatch">0</option>
+              <option name="maxInsertMatch">800</option>
+            </childOption>
+            <childOption name="reporting">
+              <option name="reporting">best</option>
+              <option name="reportUpTo">5</option>
+            </childOption>
+          </childOption>
+          <childOption name="Geneious.reference">
+            <option name="sensitivity">medium</option>
+            <option name="customComponent1" />
+            <option name="findStructuralVariants">false</option>
+            <option name="customComponent2" />
+            <option name="findDeletions">false</option>
+            <option name="maximumDeletionSize">1000</option>
+            <option name="fineTune">iterate_5</option>
+            <option name="customComponent3" />
+            <option name="customComponent4" />
+            <option name="expansionWordLength">14</option>
+            <option name="indexWordLength">12</option>
+            <option name="filterRepeatsReference">true</option>
+            <option name="filterRepeatsSizeReference">20</option>
+            <option name="allowGaps">true</option>
+            <option name="maxGapsPerRead">15</option>
+            <option name="maxGapSize">50</option>
+            <option name="maxMismatches">30</option>
+            <option name="maxAmbiguity">4</option>
+            <option name="applyMinOverlap">false</option>
+            <option name="minOverlap">25</option>
+            <option name="applyMinOverlapPercentageIdentical">false</option>
+            <option name="minOverlapPercentageIdentical">80</option>
+            <option name="doMoreThoroughSearching">false</option>
+            <option name="multipleBestMatches">mapRandomly</option>
+            <option name="applyMinimumMappingQuality">false</option>
+            <option name="minimumMappingQuality">30</option>
+            <option name="accuratelyMapReadsWithErrorsToRepeatRegions">true</option>
+            <option name="trimPairedOverhangs">true</option>
+            <option name="includeInsertionsInStructuralVariants">true</option>
+            <option name="minimumJunctionSupport">2</option>
+            <option name="reanalyzeSequencesThreshold">8</option>
+            <option name="onlyUsePairedHitsDeNovo">false</option>
+            <option name="onlyMapPairedHitsReference">false</option>
+            <option name="onlyMapPairedHitsReferenceCombobox">mapNearby</option>
+          </childOption>
+          <childOption name="GeneiousRNA.reference">
+            <option name="sensitivity">medium</option>
+            <option name="customComponent1" />
+            <option name="RNASeqMethod">spanAnnotations</option>
+            <option name="intronType">mRNA</option>
+            <option name="maximumNovelIntronSize">500000</option>
+            <option name="customComponent2" />
+            <option name="fineTune">iterate_5</option>
+            <option name="customComponent3" />
+            <option name="expansionWordLength">14</option>
+            <option name="indexWordLength">12</option>
+            <option name="filterRepeatsReference">true</option>
+            <option name="filterRepeatsSizeReference">20</option>
+            <option name="allowGaps">true</option>
+            <option name="maxGapsPerRead">15</option>
+            <option name="maxGapSize">50</option>
+            <option name="maxMismatches">30</option>
+            <option name="maxAmbiguity">4</option>
+            <option name="applyMinOverlap">false</option>
+            <option name="minOverlap">25</option>
+            <option name="applyMinOverlapPercentageIdentical">false</option>
+            <option name="minOverlapPercentageIdentical">80</option>
+            <option name="doMoreThoroughSearching">false</option>
+            <option name="multipleBestMatches">mapRandomly</option>
+            <option name="applyMinimumMappingQuality">false</option>
+            <option name="minimumMappingQuality">30</option>
+            <option name="accuratelyMapReadsWithErrorsToRepeatRegions">true</option>
+            <option name="trimPairedOverhangs">true</option>
+            <option name="includeInsertionsInStructuralVariants">true</option>
+            <option name="minimumJunctionSupport">2</option>
+            <option name="reanalyzeSequencesThreshold">8</option>
+            <option name="onlyUsePairedHitsDeNovo">false</option>
+            <option name="onlyMapPairedHitsReference">false</option>
+            <option name="onlyMapPairedHitsReferenceCombobox">mapNearby</option>
+          </childOption>
+          <childOption name="BBMap">
+            <option name="sensitivity">normal</option>
+            <option name="multipleBestMatches">random</option>
+            <option name="kmer">13</option>
+            <option name="maximumIndelSize">16000</option>
+            <option name="usemodulo">false</option>
+            <option name="pacBio">false</option>
+            <option name="memoryToAllocate">111000</option>
+            <option name="additionalOptions" />
+            <option name="customComponent1" />
+          </childOption>
+        </childOption>
+        <childOption name="trimOptions">
+          <option name="method">noTrim</option>
+          <option name="trimOptionsButton">Options</option>
+          <option name="customComponent1" />
+          <childOption name="trimOptions">
+            <option name="action">annotate</option>
+            <childOption name="vectorTrim">
+              <option name="vectorScreening">false</option>
+              <option name="minHit">16</option>
+              <multiOption name="vectorDatabaseOption">
+                <value>
+                  <option name="vectorDatabaseOption">UniVec</option>
+                </value>
+              </multiOption>
+            </childOption>
+            <childOption name="primerTrim">
+              <option name="primerScreening">false</option>
+              <childOption name="primerTrim">
+                <option name="primers" />
+                <option name="allowMismatches">true</option>
+                <option name="maxMismatches">5</option>
+                <option name="minLength">5</option>
+              </childOption>
+            </childOption>
+            <childOption name="errorProbability">
+              <option name="errorProbability">true</option>
+              <option name="errorLimit">0.05</option>
+            </childOption>
+            <childOption name="lowQualityTrim">
+              <option name="lowQuality">false</option>
+              <option name="lowQualityLimit">0</option>
+            </childOption>
+            <childOption name="ambiguityTrim">
+              <option name="ambiguity">false</option>
+              <option name="ambiguityLimit">2</option>
+            </childOption>
+            <childOption name="trimStart">
+              <option name="startTrim">true</option>
+              <option name="startTrimAtLeast">false</option>
+              <option name="startTrimMinimum">0</option>
+            </childOption>
+            <childOption name="trimEnd">
+              <option name="endTrim">true</option>
+              <option name="endTrimAtLeast">false</option>
+              <option name="endTrimMinimum">0</option>
+            </childOption>
+            <childOption name="minLength">
+              <option name="use">false</option>
+              <option name="minLength">20</option>
+            </childOption>
+            <childOption name="maxLength">
+              <option name="use">false</option>
+              <option name="maxLength">1000</option>
+            </childOption>
+          </childOption>
+        </childOption>
+        <childOption name="results">
+          <option name="nameDeNovo">{Reads Name} Assembly</option>
+          <option name="addNameVariableDeNovo">...</option>
+          <option name="nameReference">{Reads Name}</option>
+          <option name="addNameVariableReference">...</option>
+          <option name="saveReport">true</option>
+          <option name="customComponent1" />
+          <option name="saveUnusedReads">false</option>
+          <option name="customComponent2" />
+          <option name="saveUsedReads">false</option>
+          <option name="saveUsedReadsIncludeMates">false</option>
+          <option name="customComponent3" />
+          <option name="resultsInSubfolder">false</option>
+          <option name="customComponent4" />
+          <option name="generateContigs">true</option>
+          <option name="limitGeneratedContigs">true</option>
+          <option name="generatedContigsLimit">1000</option>
+          <option name="saveConsensusSequencesAsList">true</option>
+          <option name="customComponent5" />
+          <option name="generateConsensusSequencesReference">false</option>
+          <option name="consensusOptionsButtonReference">Options</option>
+          <option name="customComponent6" />
+          <option name="customComponent7" />
+          <option name="generateConsensusSequencesDeNovo">true</option>
+          <option name="consensusOptionsButtonDeNovo">Options</option>
+          <option name="customComponent8" />
+          <option name="customComponent9" />
+          <childOption name="consensus">
+            <option name="consensusSource">generateFromContig</option>
+            <childOption name="consensusOptionsReference">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+            <childOption name="consensusOptionsDeNovo">
+              <option name="thresholdPercent">weighted_60</option>
+              <option name="thresholdPercentNoQuality">65</option>
+              <option name="noConsensusGaps">false</option>
+              <option name="mapQuality">true</option>
+              <option name="mapQualityMethod">mapSummed</option>
+              <option name="noCoverageCharacterDeNovo">unknown</option>
+              <option name="noCoverageCharacterReference">unknown</option>
+              <option name="applyLowCoverageOrQualityCall">false</option>
+              <option name="lowCoverageOrQualityCharacter">unknown</option>
+              <option name="coverageOrQuality">coverage</option>
+              <option name="qualityThreshold">20</option>
+              <option name="coverageThreshold">2</option>
+              <option name="splitAroundQuestionMarks">false</option>
+              <option name="noConsensusEndGaps">true</option>
+              <option name="trimToReference">false</option>
+              <option name="ignoreReadsMappedToMultipleLocations">false</option>
+              <option name="callWhenGapInBestStates" />
+              <option name="callChromatogramHeterozygotes">true</option>
+              <option name="chromatogramHeterozygotePercentage">50</option>
+              <option name="howToStoreSequences">AskUser</option>
+            </childOption>
+          </childOption>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="displayForCloningValidation" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">8_minimap_others</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+  </XMLSerialisableRootElement>
+  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="7b9d9b9e-7582-45b4-a8c2-53d322549cee" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementCustomCode">
+      <code>import jebl.util.CompositeProgressListener;
+
+public static Options getOptions() throws DocumentOperationException {
+	Options options = new Options(getThisClass());
+    Options.IntegerOption numberOfSampleSets = options.addIntegerOption("numberOfSampleSets", "Number of sample sets per document: ",1,1,Integer.MAX_VALUE);
+    options.addIntegerOption("sequencesPerSet","Sequences per set: ",1000,1,Integer.MAX_VALUE);
+    Options.BooleanOption useFirstSequences = options.addBooleanOption("useFirstSequences", "Use first sequences from list instead of randomly sampling", false);
+    Options.IntegerOption seed = options.addIntegerOption("randomSeed", "Random seed : ", 0, 0, Integer.MAX_VALUE);
+    seed.setUnits("(0=random; any other value creates reproducible results)");
+    useFirstSequences.addDependent(seed, false);
+    useFirstSequences.addDependent(numberOfSampleSets, false);
+    numberOfSampleSets.setDisabledValue(1);
+ 	return options;
+}
+
+public static List&lt;AnnotatedPluginDocument&gt; performOperation(List&lt;AnnotatedPluginDocument&gt; documents, Options options,
+															 ProgressListener progressListener) throws DocumentOperationException {
+	List&lt;AnnotatedPluginDocument&gt; results = new ArrayList&lt;AnnotatedPluginDocument&gt;();
+    int sampleSize = ((Options.IntegerOption)options.getOption("sequencesPerSet")).getValue();
+    int samples = ((Options.IntegerOption)options.getOption("numberOfSampleSets")).getValue();
+    int seed = ((Options.IntegerOption)options.getOption("randomSeed")).getValue();
+    boolean useFirstSequences = ((Options.BooleanOption)options.getOption("useFirstSequences")).getValue();
+    if (useFirstSequences) {
+        samples = 1;
+    }
+    if (seed==0)
+        seed = new Random().nextInt();
+    CompositeProgressListener compositeProgressListener = new CompositeProgressListener(progressListener, documents.size() * samples);
+    Random r = new Random(seed);
+	
+    for (AnnotatedPluginDocument document : documents) {
+        for (int sampleSet = 1; sampleSet &lt;= samples; sampleSet++) {
+            compositeProgressListener.beginSubtask();
+            if (compositeProgressListener.isCanceled())
+                throw new DocumentOperationException.Canceled();
+            final PluginDocument pluginDocument = document.getDocument();
+            if (!(pluginDocument instanceof SequenceListDocument))
+                throw new DocumentOperationException("Can only randomly sample sequence lists");
+            PairedReads pairedReads = null;
+            List&lt;? extends SequenceDocument&gt; sequences = ((SequenceListDocument) pluginDocument).getNucleotideSequences();
+            SequenceListOnDisk.Builder builder;
+            if (sequences.isEmpty()) {
+                sequences = ((SequenceListDocument) pluginDocument).getAminoAcidSequences();
+                builder = new SequenceListOnDisk.Builder(false, SequenceDocument.Alphabet.PROTEIN, false);
+            } else {
+                builder = new SequenceListOnDisk.Builder(false, SequenceDocument.Alphabet.NUCLEOTIDE, false);
+                if (pluginDocument instanceof PairedReads) {
+                    pairedReads = (PairedReads) pluginDocument;
+                }
+            }
+            int sequenceCount = sequences.size();
+            int thisSampleSize = Math.min(sequenceCount, sampleSize);
+            BitSet sequencesToUse = new BitSet(sequenceCount);
+            int sequencesPicked = 0;
+            while (sequencesPicked &lt; thisSampleSize) {
+                int sequenceIndex = useFirstSequences?sequencesPicked:r.nextInt(sequenceCount);
+                if (sequencesToUse.get(sequenceIndex))
+                    continue;
+                sequencesToUse.set(sequenceIndex);
+                sequencesPicked++;
+                if (sequencesPicked &lt; thisSampleSize &amp;&amp; pairedReads != null &amp;&amp; pairedReads.getMateIndex(sequenceIndex) &gt;= 0) {
+                    final int mateIndex = pairedReads.getMateIndex(sequenceIndex);
+                    if (!sequencesToUse.get(mateIndex)) {
+                        sequencesToUse.set(mateIndex);
+                        sequencesPicked++;
+                    }
+                }
+            }
+
+            sequencesPicked = 0;
+            for (int i = 0; i &lt; sequenceCount; i++) {
+                if (compositeProgressListener.setProgress(i, sequenceCount))
+                    throw new DocumentOperationException.Canceled();
+                if (!sequencesToUse.get(i))
+                    continue;
+                if (pairedReads != null &amp;&amp; pairedReads.getMateIndex(i) &gt;= 0 &amp;&amp; sequencesToUse.get(pairedReads.getMateIndex(i))) {
+                    final int mateIndex = pairedReads.getMateIndex(i);
+                    if (mateIndex &lt; i)
+                        continue; // already done
+                    builder.addSequenceWithMate(sequences.get(i), sequences.get(mateIndex), pairedReads.getMateExpectedDistance(i), pairedReads.getMateExpectedDistance(mateIndex), ProgressListener.EMPTY);
+                    sequencesPicked+=2;
+                } else {
+                    builder.addSequence(sequences.get(i), ProgressListener.EMPTY);
+                    sequencesPicked++;
+                }
+                if (sequencesPicked&gt;=thisSampleSize)
+                    break;
+            }
+            final DefaultSequenceListDocument resultDocument = builder.toSequenceListDocument(ProgressListener.EMPTY);
+            String name = StringUtilities.commaFormat(thisSampleSize) + " sequences from " + document.getName();
+            if (samples&gt;1)
+                name+=" set "+sampleSet;
+            resultDocument.setName(name);
+            results.add(DocumentUtilities.createAnnotatedPluginDocument(resultDocument));
+        }
+    }
+    return results;
+
+}</code>
+    </workflowElement>
+  </XMLSerialisableRootElement>
+</geneiousWorkflows>
