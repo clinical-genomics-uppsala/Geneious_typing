@@ -41,8 +41,8 @@ The workflow is tested on Windows and Mac, but may work on Linux.
 
 | Geneious_typing | image | software version |
 | -------- | ------- | ------- |
-| develop | build from spatyper/spatyper.Dockerfile | 1.0.0 |
-| develop | quay.io/biocontainers/krocus:1.0.3--pyhdfd78af_0 | 1.0.3 |
+| v.0.2.0 | build from spatyper/spatyper.Dockerfile | 1.0.0 |
+| v.0.2.0 | quay.io/biocontainers/krocus:1.0.3--pyhdfd78af_0 | 1.0.3 |
 
 ### 1. Create spatyper wrapper plugin
 Go to 'File' --> 'Create/Edit Wrapper Plugin..'. Press '+New'
