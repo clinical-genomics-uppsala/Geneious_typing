@@ -40,9 +40,9 @@ def run_subprocess(command, name):
 # bedtools multicov -bams *.bam -bed  /path/to/restox_primers.bed > amplicon_counts.tsv
 bedtools_multicov = (
     "bedtools multicov -bams "
-    + str(os.path.join("/geneious", infile))
+    + str(os.path.join("/geneious", infile).replace("\\", "/"))
     + " -bed "  
-    + str(os.path.join("/bedfiles", bedfile))
+    + str(os.path.join("/bedfiles", bedfile).replace("\\", "/"))
     + "  > /geneious/counts.tsv"
 )
 
