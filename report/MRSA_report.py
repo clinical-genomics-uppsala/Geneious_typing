@@ -16,7 +16,7 @@ SPA_FIELDS = ["#spa Type", "Repeats"]
 KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF"]
 RESTOX_FIELDS = ['reference','pos1','pos2','gene','count']
 REPORT_HEADER = ["sample"] + SPA_FIELDS + KROCUS_FIELDS + ["nuc", "pvl", "mecA", "mecC", "tst", "date"]
-EXCEL_FILE = "MRSA_results.xlsx"
+EXCEL_FILE = os.path.join(FOLDER,"MRSA_results.xlsx")
 WORKSHEET_NAME = "MRSA_panel_results"
 
 ##### Functions for parsing input data #####
@@ -87,6 +87,7 @@ def read_krocus_txt(sample_dict, fields):
                         }
     return results
 
+
 def combine_results(dict_list):
     """ Concatenate dicts with same keys """
     concat_dict = {}
@@ -104,20 +105,19 @@ def write_header(header_list, worksheet, format):
     for col_num, data in enumerate(header_list):
         worksheet.write(0, col_num, data, format)
 
-def write_nested_dict_to_table(nested_dict, worksheet):
+
+def write_nested_dict_to_table(nested_dict, worksheet, header, fill_value):
     """ Write table contents
         Each row starts with outer keys, followed by the values
+        Fill missing data with fill_value
         Skip first row = header
     """
-    row = 1
-    order=sorted(nested_dict.keys())
-    for key in order:
-        col = 1
-        worksheet.write(row, 0, key)
-        for value in nested_dict[key].items():
-            worksheet.write(row, col, value[1]) # varför tuple?
-            col += 1
-        row += 1
+    for row, sample in enumerate(sorted(nested_dict.keys()), start=1):
+        worksheet.write(row, 0, sample)
+        for col, field in enumerate(header[1:], start=1):
+            value = nested_dict[sample].get(field, fill_value)
+            worksheet.write(row, col, value)
+
 
 def fill_last_column(worksheet, dictionary, header, text):
     """ Fill last column with "text" """
@@ -145,7 +145,7 @@ heading_format = workbook.add_format({'bold': True, 'font_size': 14})
 
 worksheet_results = workbook.add_worksheet(WORKSHEET_NAME)
 write_header(REPORT_HEADER, worksheet_results, heading_format)
-write_nested_dict_to_table(all_results , worksheet_results)
+write_nested_dict_to_table(all_results, worksheet_results, REPORT_HEADER, "no data")
 
 fill_last_column(worksheet_results, all_results, REPORT_HEADER, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
 
