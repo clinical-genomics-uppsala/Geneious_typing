@@ -73,18 +73,32 @@ def read_krocus_txt(sample_dict, fields):
         File with no header
         Get row with highest coverage
         Return a nested dict with sample names, ST, coverage and alleles
+        When no allele is found add NA to dict
     """
     results = {}
     for sample, file in sample_dict.items():
         with open(file, 'r') as csvfile:
-                csvreader = csv.DictReader(csvfile, delimiter='\t', fieldnames=fields)
+                csvreader = csv.DictReader(csvfile, delimiter='\t', fieldnames=fields, restval="NA")
                 sorted_rows = sorted(csvreader, key=lambda d: float(d['coverage']), reverse=True)
                 for s, row in enumerate(sorted_rows, start=1):
                     if s == 1:
-                        krocus_data = {gene: row[gene] for gene in fields}
-                        results[sample] = {
-                            **krocus_data
-                        }
+                        krocus_data = {gene: row[gene] for gene in fields[0:2]}
+
+                    # Initialize all allele values with 'NA'
+                        for gene in fields[2:]:
+                            krocus_data[gene] = "NA"
+
+                        # Try to match each value to a fieldname
+                        for value in row.values():
+                            match = re.match("(^\S+)\(", str(value).lower())
+                            if match:
+                                gene_name = match.group(1)
+                                for gene in fields[2:]:
+                                    if gene.lower() == gene_name and krocus_data[gene] == "NA":
+                                        krocus_data[gene] = value
+                                        break
+
+                        results[sample] = krocus_data
     return results
 
 
