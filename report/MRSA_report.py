@@ -64,7 +64,7 @@ def read_restox_txt(sample_dict, fields):
             for row in csvreader:
                 gene = row['gene']
                 count = row['count']
-                results[sample][gene] = count
+                results[sample][gene] = int(count)
     return results
 
 def read_krocus_txt(sample_dict, fields):
