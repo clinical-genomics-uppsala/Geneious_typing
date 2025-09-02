@@ -60,11 +60,11 @@ def read_restox_txt(sample_dict, fields):
     for sample, file in sample_dict.items():
         results[sample] = {}
         with open(file, 'r') as csvfile:
-                csvreader = csv.DictReader(csvfile, delimiter='\t', fieldnames=fields)
-                for row in csvreader:
-                    gene = row['gene']
-                    count = row['count']
-                    results[sample][gene] = count
+            csvreader = csv.DictReader(csvfile, delimiter='\t', fieldnames=fields)
+            for row in csvreader:
+                gene = row['gene']
+                count = row['count']
+                results[sample][gene] = count
     return results
 
 def read_krocus_txt(sample_dict, fields):
@@ -84,7 +84,7 @@ def read_krocus_txt(sample_dict, fields):
                     if s == 1:
                         krocus_data = {gene: row[gene] for gene in fields[0:2]}
 
-                    # Initialize all allele values with 'NA'
+                        # Initialize all allele values with 'NA'
                         for gene in fields[2:]:
                             krocus_data[gene] = "NA"
 
@@ -101,7 +101,6 @@ def read_krocus_txt(sample_dict, fields):
                         results[sample] = krocus_data
     return results
 
-
 def combine_results(dict_list):
     """ Concatenate dicts with same keys """
     concat_dict = {}
@@ -114,11 +113,19 @@ def combine_results(dict_list):
 
 
 ##### Functions for writing to excel #####
-def write_header(header_list, worksheet, format):
-    """ Write table header as first row in worksheet """
-    for col_num, data in enumerate(header_list):
-        worksheet.write(0, col_num, data, format)
+def report_header_to_dict (header):
+    """ Adapt header list to format required by Excel data table """
+    header_list = []
+    for name in header:
+        header_dict = {}
+        header_dict['header'] = name
+        header_list.append(header_dict)
+    return header_list
 
+def convert_colno_to_letter(colno):
+    """ Convert column number to Excel column letter (works for <27 columns)"""
+    letter = chr(colno + 64)
+    return letter
 
 def write_nested_dict_to_table(nested_dict, worksheet, header, fill_value):
     """ Write table contents
@@ -131,7 +138,6 @@ def write_nested_dict_to_table(nested_dict, worksheet, header, fill_value):
         for col, field in enumerate(header[1:], start=1):
             value = nested_dict[sample].get(field, fill_value)
             worksheet.write(row, col, value)
-
 
 def fill_last_column(worksheet, dictionary, header, text):
     """ Fill last column with "text" """
@@ -154,11 +160,14 @@ all_results = combine_results([spa_results, krocus_results, restox_results])
 
 ##### Write to excel  #####
 workbook = xlsxwriter.Workbook(EXCEL_FILE)
-
-heading_format = workbook.add_format({'bold': True, 'font_size': 14})
+workbook.formats[0].set_font_size(14)
 
 worksheet_results = workbook.add_worksheet(WORKSHEET_NAME)
-write_header(REPORT_HEADER, worksheet_results, heading_format)
+
+report_header_list = report_header_to_dict(REPORT_HEADER)
+table_area = "A1:" + convert_colno_to_letter(len(REPORT_HEADER)) + str(len(all_results)+1)
+worksheet_results.add_table(table_area, {'columns': report_header_list,'banded_rows': True,'first_column': True, 'style': 'Table Style Light 2'})
+
 write_nested_dict_to_table(all_results, worksheet_results, REPORT_HEADER, "no data")
 
 fill_last_column(worksheet_results, all_results, REPORT_HEADER, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
