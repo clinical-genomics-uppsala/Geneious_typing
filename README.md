@@ -7,21 +7,23 @@ Main steps:
 - input: FASTQ files
 - quality filtering with BBDuk
 - sequentially mapping reads with minimap2 to spa, MLST and virulence and resistance genes respectively, continuing with unused reads to the next mapping step
-- Geneious assembler to cluster spa reads [(inspired by these settings)](https://www.geneious.com/tutorials/metagenomic-analysis) and spa typing with [spatyper](https://bitbucket.org/genomicepidemiology/spatyper)
+- Geneious assembler to cluster spa reads [(inspired by these settings)](https://www.geneious.com/tutorials/metagenomic-analysis), annotation of spa repeats and spa typing with [spatyper](https://bitbucket.org/genomicepidemiology/spatyper)
 - [Krokus](https://github.com/andrewjpage/krocus) to predict sequence types (ST) from a subset of mapped MLST reads
 - Counts of mapped resistance and toxin genes with bedtools multicov
+- Excel report with results for multiple samples
 - Output structure in Geneious:
 ````
 FASTQ input files
-	1_minimap_spa
-	2_spa_de_novo
-	3_input_spatyper
-	4_spatyper
-	5_minimap_mlst
-	6_mlst_reads_for_krocus
-	7_krokus
-	8_minimap_restox
-	9_restox
+	01_minimap_spa
+	02_spa_de_novo
+	03_spa_de_novo_annotated
+	04_input_spatyper
+	05_spatyper
+	06_minimap_mlst
+	07_mlst_reads_for_krocus
+	08_krokus
+	09_minimap_restox
+	10_restox
 ````
 
 
@@ -37,15 +39,22 @@ The workflow is tested on Windows and Mac, but may work on Linux.
 
 # Installation
 
+## Add spa repeat annotations to Geneious
+1. Copy the spa repeats from [https://spa.ridom.de/repeats.shtml](https://spa.ridom.de/repeats.shtml) and save as a tsv file.
+2. Create a new folder in Geneious and import the tsv file. Select 'Import Type: Primer' and column 1 as 'Name' and column 3 as 'Sequence'.
+3. Select all imported documents and go to the annotations tab. Select all annotations and press 'Edit Annotations'.
+Under name select 'Copy name from: Sequence property' and 'Property: Sequence Name'. Change the annotation type to 'Repeat Region'.
+
 ## Setup Geneious wrapper plugins
 
-### Software versions
+### Required docker images and software versions
 
 | Geneious_typing | image | software version |
 | -------- | ------- | ------- |
 | v.0.2.0 | build from spatyper/spatyper.Dockerfile | spaTyper 1.0.0 |
 | v.0.2.0 | quay.io/biocontainers/krocus:1.0.3--pyhdfd78af_0 | krocus 1.0.3 |
 | develop | hydragenetics/common:3.1.1.1 | bedtools v2.31.1 | 
+| develop | hydragenetics/common:3.1.1.1 | xlsxwriter 3.2.3 | 
 
 ### 1. Create spatyper wrapper plugin
 Go to 'File' --> 'Create/Edit Wrapper Plugin..'. Press '+New'
@@ -56,7 +65,7 @@ Go to 'File' --> 'Create/Edit Wrapper Plugin..'. Press '+New'
 		`spatyper/spatyper.py` under 'Linux' and 'Mac OSX'  
 		`spatyper/spatyper.bat` under 'Windows'  
 	- 'Additional Bundled Files (optional)' add:
-	 `spatyper/spatyper.py` and `spatyper_db` - download [here](https://bitbucket.org/genomicepidemiology/spatyper_db/src/main/).
+	 `spatyper/spatyper.py` and `spatyper_db` - download [here](https://bitbucket.org/genomicepidemiology/spatyper_db/).
 - Step 2: 
 	- 'Sequence Type:' select 'Nucleotide only'.
 	- 'Document Type:' select 'Single Sequence'.
@@ -117,15 +126,40 @@ Go to 'File' --> 'Create/Edit Wrapper Plugin..'. Press '+New'
 - Step 3:  
 	Press 'Add' to add two user options (in this order):
 	- 'Command Line Switch': path_to_docker, 'Option Label': Path to Docker
-	- 'Command Line Switch': bedtools_image, 'Option Label': bedtools Docker image
+	- 'Command Line Switch': bedtools_image, 'Option Label': bedtools Docker image (hydragenetics/common)
 	- 'Command Line Switch': bedfile, 'Option Label': name of bedfile (same name as in step 1)
 
-<!--  -->
-## Setup Geneious workflows
+### 4. Create MRSA_report wrapper plugin
+Go to 'File' --> 'Create/Edit Wrapper Plugin..'. Press '+New'
+- Step 1: 
+	- Fill in 'Plugin Name:' and 'Menu/Button Text:' of your choice. 
+	- 'Plugin Type:' select 'General Operation'. 
+	- 'Bundled Program Files (optional)' add:  
+		`report/run_report.py` under 'Linux' and 'Mac OSX'  
+		`report/run_report.bat` under 'Windows'  
+	- 'Additional Bundled Files (optional)' add:
+	 `report/run_report.py` and `report/MRSA_report.py`.
+- Step 2: 
+	- 'Sequence Type:' select 'Nucleotide only'.
+	- 'Document Type:' select 'Unaligned sequences (1+)'.
+	- 'Format': 'FastQ Compressed (Sanger scores)'.
+	- 'Command Line':
+		`[otherOptions] 2>&1 > log.txt`
+	- Under 'Output' 'File Name:' `log.txt` and select 'Format:' 'Text file (plain)' and 'Name in Geneious:' `log`
+	- Check 'Save 'Standard Out' as a note on the first output document'
+- Step 3:  
+	Press 'Add' to add two user options (in this order):
+	- 'Command Line Switch': path_to_docker, 'Option Label': Path to Docker
+	- 'Command Line Switch': report_image, 'Option Label': report Docker image (hydragenetics/common)
+	- 'Command Line Switch': path_to_data, 'Option Label': Data path
+
+## Setup Geneious workflow
 1. Import the reference sequences from `geneious/Saureus_references.geneious`
 2. Import the workflow from `geneious/MRSA_panel.geneiousWorkflow`
-3. Edit the 'Align/Assemble -> Map to Reference' steps to use the imported reference sequences (order: spa_gene, mlst_genes and restox_genes).
-4. Add the spatyper, krocus and bedtools_multicov plugins to their respective steps in the workflow
+3. Edit the 'Align/Assemble -> Map to Reference' steps to use the imported reference sequences (order: spa_gene, mlst_genes and restox_genes)
+4. Add folder with spa repeat annotations to step 'Annotate from Database'
+5. Add the spatyper, krocus, bedtools_multicov and MRSA_report plugins to their respective steps in the workflow
+6. Edit the path to the three export steps (must be the same as path_to_data in the MRSA_report plugin)
 
 ## Acknowledgements
 
