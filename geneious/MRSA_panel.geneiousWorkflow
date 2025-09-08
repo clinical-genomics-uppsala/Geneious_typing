@@ -1,5 +1,5 @@
 <geneiousWorkflows>
-  <XMLSerialisableRootElement name="MRSA panel devlop" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="f1a05574-daad-4950-825d-e2c83a1dd2ee" revisionNumber="23" sharedToCloud="true" wasEverSharedToCloud="true" description="&lt;html&gt;- 2025-08-27 added bedtools_multicov&lt;/html&gt;" bundledIconName="plugin">
+  <XMLSerialisableRootElement name="MRSA panel develop" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="fd519dfb-4dd9-402c-8b4b-cd3df5613093" revisionNumber="37" sharedToCloud="true" wasEverSharedToCloud="true" description="&lt;html&gt;- 2025-08-27 added bedtools_multicov &#xA;- 2025-09-03 fix filtering before BBDuk, maq=15&#xA;- 2025-09-08 add annotations, add report&lt;/html&gt;" bundledIconName="plugin">
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="filterWhat">eachSequence</option>
@@ -62,7 +62,21 @@
       </Options>
       <optionToExpose optionName="advancedCheckbox" label="" />
     </workflowElement>
-    <workflowElement id="BBDuk" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">number_of_sequences</option>
+            <option name="condition">greater_than</option>
+            <option name="value">1</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="BBDuk" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="true" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="trimAdapters">false</option>
         <option name="qualityTrim">true</option>
@@ -72,7 +86,7 @@
         <option name="keepOrder">true</option>
         <option name="customComponent1" />
         <option name="memoryToAllocate">1000</option>
-        <option name="additionalOptions">maq=19</option>
+        <option name="additionalOptions">maq=15</option>
         <option name="customComponent2" />
         <childOption name="adapterTrimming">
           <option name="adapters">inMemoryDocument__|urn:local:BBDukOptions:adapters.fa|All Truseq, Nextera and PhiX adapters___</option>
@@ -448,7 +462,7 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">1_minimap_spa</option>
+        <option name="subFolderName">01_minimap_spa</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -472,7 +486,7 @@
     <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="advancedCheckbox">true</option>
-        <option name="customComponent1"></option>
+        <option name="customComponent1" />
         <childOption name="renameMethodChildOptions">
           <option name="selectedRenameMethod">renamableOption2</option>
           <childOption name="BatchRenameSubOptions0">
@@ -492,11 +506,11 @@
         <childOption name="basicSuperOptions">
           <option name="task">replaceWithRadioButton</option>
           <option name="r1">fieldOptioncache_name</option>
-          <option name="rSep"></option>
+          <option name="rSep" />
           <option name="r2">nothingSelectedOption</option>
-          <option name="rSep2"></option>
+          <option name="rSep2" />
           <option name="r3">nothingSelectedOption</option>
-          <option name="appendTextField"></option>
+          <option name="appendTextField" />
           <option name="appendPositionComboBox">endValue</option>
           <option name="removeHowMuchIntegerOption">1</option>
           <option name="removePositionComboBox">endValue</option>
@@ -831,7 +845,72 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">2_spa_de_novo</option>
+        <option name="subFolderName">02_spa_de_novo</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">filterDocumentTypeField</option>
+            <option name="condition">contains</option>
+            <option name="value">Nucleotide</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="Operation_com.biomatters.plugins.featureFinder.FeatureFinder_NUCLEOTIDE" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="source">LocalDocuments/MRSA panel/References/spa_repeats</option>
+        <option name="similarity">100</option>
+        <option name="name">[]</option>
+        <option name="whatToFind">bestMatch</option>
+        <option name="customComponent1"></option>
+        <option name="applyToReferencedSequences">false</option>
+        <childOption name="sourceDatabase">
+          <option name="nucleotideSearch">true</option>
+          <option name="proteinSearch">false</option>
+          <option name="searchSubfolders">false</option>
+          <option name="includeTruncatedAnnotations">false</option>
+          <option name="createMiscFeatureFromUnannotatedSource">false</option>
+        </childOption>
+        <childOption name="searchParameters">
+          <option name="gateway">true</option>
+          <option name="validateCDS">true</option>
+          <option name="maxAdjustmentForORFs">50</option>
+          <option name="mergeIntervalsOverlapPercent">75</option>
+          <option name="nucleotideWordSize">10</option>
+          <option name="translationWordSizeOption">4</option>
+        </childOption>
+        <childOption name="types">
+          <option name="onlyAnnotate">false</option>
+          <option name="onlyAnnotateTypes">Gene</option>
+          <option name="dontAnnotateTypes">Coverage - High
+Coverage - Low
+CRISPR.
+Editing History
+Expression Difference
+Expression Level
+Optimized Codon
+overhang
+Polymorphism
+trimmed</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="source" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">03_spa_de_novo_annotated</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -852,7 +931,7 @@
       </Options>
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
-    <workflowElement id="Randomly Sample Sequences_a3832ed2-43dc-47a3-b9e5-03ae69c6580e" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_7543ab3e-4402-49c9-b524-b9e42afca125" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -867,7 +946,7 @@
     <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="advancedCheckbox">true</option>
-        <option name="customComponent1"></option>
+        <option name="customComponent1" />
         <childOption name="renameMethodChildOptions">
           <option name="selectedRenameMethod">renamableOption2</option>
           <childOption name="BatchRenameSubOptions0">
@@ -887,11 +966,11 @@
         <childOption name="basicSuperOptions">
           <option name="task">replaceWithRadioButton</option>
           <option name="r1">fieldOptioncache_name</option>
-          <option name="rSep"></option>
+          <option name="rSep" />
           <option name="r2">nothingSelectedOption</option>
-          <option name="rSep2"></option>
+          <option name="rSep2" />
           <option name="r3">nothingSelectedOption</option>
-          <option name="appendTextField"></option>
+          <option name="appendTextField" />
           <option name="appendPositionComboBox">endValue</option>
           <option name="removeHowMuchIntegerOption">1</option>
           <option name="removePositionComboBox">endValue</option>
@@ -954,7 +1033,7 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">3_input_spatyper</option>
+        <option name="subFolderName">04_input_spatyper</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -966,22 +1045,34 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">4_spatyper</option>
+        <option name="subFolderName">05_spatyper</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
     </workflowElement>
+    <workflowElement id="BatchExport" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="fileFormat">com.biomatters.plugins.textImporter.TextDocumentExporter</option>
+        <option name="optionsButton">Options</option>
+        <option name="folder" extra="C:\\Users\\funk0197\\Desktop\\MRSA_RUN,">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        <option name="extension">.txt</option>
+        <option name="exportOptionsXml"></option>
+        <option name="exportToSingleFile">false</option>
+        <option name="singleFileName">results</option>
+      </Options>
+      <optionToExpose optionName="fileFormat" label="" />
+    </workflowElement>
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">false</option>
-        <option name="subFolderName" />
+        <option name="subFolderName"></option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">branchFrom</option>
-        <option name="back">12</option>
+        <option name="back">16</option>
       </options>
     </workflowElement>
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
@@ -1300,7 +1391,7 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">5_minimap_mlst</option>
+        <option name="subFolderName">06_minimap_mlst</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -1322,7 +1413,7 @@
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
     <workflowElement id="ExtractNonReferenceSequencesOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
-    <workflowElement id="Randomly Sample Sequences_a3832ed2-43dc-47a3-b9e5-03ae69c6580e" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_7543ab3e-4402-49c9-b524-b9e42afca125" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -1337,7 +1428,7 @@
     <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="advancedCheckbox">true</option>
-        <option name="customComponent1"></option>
+        <option name="customComponent1" />
         <childOption name="renameMethodChildOptions">
           <option name="selectedRenameMethod">renamableOption2</option>
           <childOption name="BatchRenameSubOptions0">
@@ -1357,11 +1448,11 @@
         <childOption name="basicSuperOptions">
           <option name="task">replaceWithRadioButton</option>
           <option name="r1">fieldOptioncache_name</option>
-          <option name="rSep"></option>
+          <option name="rSep" />
           <option name="r2">nothingSelectedOption</option>
-          <option name="rSep2"></option>
+          <option name="rSep2" />
           <option name="r3">nothingSelectedOption</option>
-          <option name="appendTextField"></option>
+          <option name="appendTextField" />
           <option name="appendPositionComboBox">endValue</option>
           <option name="removeHowMuchIntegerOption">1</option>
           <option name="removePositionComboBox">endValue</option>
@@ -1424,7 +1515,7 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">6_mlst_reads_for_krocus</option>
+        <option name="subFolderName">07_mlst_reads_for_krocus</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -1436,22 +1527,34 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">7_krocus</option>
+        <option name="subFolderName">08_krocus</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
     </workflowElement>
+    <workflowElement id="BatchExport" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="fileFormat">com.biomatters.plugins.textImporter.TextDocumentExporter</option>
+        <option name="optionsButton">Options</option>
+        <option name="folder" extra="C:\\Users\\funk0197\\Desktop\\MRSA_RUN,">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        <option name="extension">.txt</option>
+        <option name="exportOptionsXml"></option>
+        <option name="exportToSingleFile">false</option>
+        <option name="singleFileName">results</option>
+      </Options>
+      <optionToExpose optionName="fileFormat" label="" />
+    </workflowElement>
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">false</option>
-        <option name="subFolderName" />
+        <option name="subFolderName"></option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">branchFrom</option>
-        <option name="back">9</option>
+        <option name="back">10</option>
       </options>
     </workflowElement>
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
@@ -1478,23 +1581,23 @@
           <option name="reassemble">true</option>
           <option name="useReferenceSequence">true</option>
           <option name="referenceSequenceName">urn:local:.:cd-jl0gv2t</option>
-          <option name="customComponent1"></option>
-          <option name="customComponent2"></option>
-          <option name="customComponent3"></option>
+          <option name="customComponent1" />
+          <option name="customComponent2" />
+          <option name="customComponent3" />
           <option name="assembleByDocumentFields">false</option>
           <option name="groupAssemblies">false</option>
           <option name="namePart">0</option>
           <option name="nameSeparator" extra="">- (Hyphen)</option>
-          <option name="customComponent4"></option>
+          <option name="customComponent4" />
           <option name="assembleListsSeparately">false</option>
         </childOption>
         <childOption name="method">
           <childOption name="algorithm">
             <option name="deNovoAssembly">dummy</option>
-            <option name="customComponent1"></option>
+            <option name="customComponent1" />
             <option name="referenceAssembly">Minimap2_Biomatters</option>
-            <option name="customComponent2"></option>
-            <option name="customComponent3"></option>
+            <option name="customComponent2" />
+            <option name="customComponent3" />
           </childOption>
           <childOption name="StarRnaSeqAligner" />
           <childOption name="bowtie2">
@@ -1503,8 +1606,8 @@
             <option name="sensitivity">sensitive</option>
             <childOption name="normal">
               <option name="packRef">false</option>
-              <option name="commandLine"></option>
-              <option name="customComponent1"></option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
             </childOption>
             <childOption name="algorithmOptions">
               <option name="multiThreading">true</option>
@@ -1523,7 +1626,7 @@
               <option name="-x">map-ont --frag=yes</option>
               <option name="kmerCheck">false</option>
               <option name="-k">15</option>
-              <option name="additionalOptions"></option>
+              <option name="additionalOptions" />
               <option name="--secondary=yes">false</option>
               <childOption name="Include Secondary Alignments">
                 <option name="-N">5</option>
@@ -1534,8 +1637,8 @@
           <childOption name="bowtie">
             <childOption name="normal">
               <option name="packRef">false</option>
-              <option name="commandLine"></option>
-              <option name="customComponent1"></option>
+              <option name="commandLine" />
+              <option name="customComponent1" />
             </childOption>
             <childOption name="algorithmOptions">
               <option name="multiThreading">true</option>
@@ -1551,14 +1654,14 @@
           </childOption>
           <childOption name="Geneious.reference">
             <option name="sensitivity">medium</option>
-            <option name="customComponent1"></option>
+            <option name="customComponent1" />
             <option name="findStructuralVariants">false</option>
-            <option name="customComponent2"></option>
+            <option name="customComponent2" />
             <option name="findDeletions">false</option>
             <option name="maximumDeletionSize">1000</option>
             <option name="fineTune">iterate_5</option>
-            <option name="customComponent3"></option>
-            <option name="customComponent4"></option>
+            <option name="customComponent3" />
+            <option name="customComponent4" />
             <option name="expansionWordLength">14</option>
             <option name="indexWordLength">12</option>
             <option name="filterRepeatsReference">true</option>
@@ -1587,13 +1690,13 @@
           </childOption>
           <childOption name="GeneiousRNA.reference">
             <option name="sensitivity">medium</option>
-            <option name="customComponent1"></option>
+            <option name="customComponent1" />
             <option name="RNASeqMethod">spanAnnotations</option>
             <option name="intronType">mRNA</option>
             <option name="maximumNovelIntronSize">500000</option>
-            <option name="customComponent2"></option>
+            <option name="customComponent2" />
             <option name="fineTune">iterate_5</option>
-            <option name="customComponent3"></option>
+            <option name="customComponent3" />
             <option name="expansionWordLength">14</option>
             <option name="indexWordLength">12</option>
             <option name="filterRepeatsReference">true</option>
@@ -1628,14 +1731,14 @@
             <option name="usemodulo">false</option>
             <option name="pacBio">false</option>
             <option name="memoryToAllocate">111000</option>
-            <option name="additionalOptions"></option>
-            <option name="customComponent1"></option>
+            <option name="additionalOptions" />
+            <option name="customComponent1" />
           </childOption>
         </childOption>
         <childOption name="trimOptions">
           <option name="method">noTrim</option>
           <option name="trimOptionsButton">Options</option>
-          <option name="customComponent1"></option>
+          <option name="customComponent1" />
           <childOption name="trimOptions">
             <option name="action">annotate</option>
             <childOption name="vectorTrim">
@@ -1650,7 +1753,7 @@
             <childOption name="primerTrim">
               <option name="primerScreening">false</option>
               <childOption name="primerTrim">
-                <option name="primers"></option>
+                <option name="primers" />
                 <option name="allowMismatches">true</option>
                 <option name="maxMismatches">5</option>
                 <option name="minLength">5</option>
@@ -1694,27 +1797,27 @@
           <option name="nameReference">{Reads Name}</option>
           <option name="addNameVariableReference">...</option>
           <option name="saveReport">true</option>
-          <option name="customComponent1"></option>
+          <option name="customComponent1" />
           <option name="saveUnusedReads">false</option>
-          <option name="customComponent2"></option>
+          <option name="customComponent2" />
           <option name="saveUsedReads">false</option>
           <option name="saveUsedReadsIncludeMates">false</option>
-          <option name="customComponent3"></option>
+          <option name="customComponent3" />
           <option name="resultsInSubfolder">false</option>
-          <option name="customComponent4"></option>
+          <option name="customComponent4" />
           <option name="generateContigs">true</option>
           <option name="limitGeneratedContigs">true</option>
           <option name="generatedContigsLimit">1000</option>
           <option name="saveConsensusSequencesAsList">true</option>
-          <option name="customComponent5"></option>
+          <option name="customComponent5" />
           <option name="generateConsensusSequencesReference">false</option>
           <option name="consensusOptionsButtonReference">Options</option>
-          <option name="customComponent6"></option>
-          <option name="customComponent7"></option>
+          <option name="customComponent6" />
+          <option name="customComponent7" />
           <option name="generateConsensusSequencesDeNovo">true</option>
           <option name="consensusOptionsButtonDeNovo">Options</option>
-          <option name="customComponent8"></option>
-          <option name="customComponent9"></option>
+          <option name="customComponent8" />
+          <option name="customComponent9" />
           <childOption name="consensus">
             <option name="consensusSource">generateFromContig</option>
             <childOption name="consensusOptionsReference">
@@ -1734,7 +1837,7 @@
               <option name="noConsensusEndGaps">true</option>
               <option name="trimToReference">false</option>
               <option name="ignoreReadsMappedToMultipleLocations">false</option>
-              <option name="callWhenGapInBestStates"></option>
+              <option name="callWhenGapInBestStates" />
               <option name="callChromatogramHeterozygotes">true</option>
               <option name="chromatogramHeterozygotePercentage">50</option>
               <option name="howToStoreSequences">AskUser</option>
@@ -1756,7 +1859,7 @@
               <option name="noConsensusEndGaps">true</option>
               <option name="trimToReference">false</option>
               <option name="ignoreReadsMappedToMultipleLocations">false</option>
-              <option name="callWhenGapInBestStates"></option>
+              <option name="callWhenGapInBestStates" />
               <option name="callChromatogramHeterozygotes">true</option>
               <option name="chromatogramHeterozygotePercentage">50</option>
               <option name="howToStoreSequences">AskUser</option>
@@ -1770,7 +1873,7 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">8_minimap_restox</option>
+        <option name="subFolderName">09_minimap_restox</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -1805,15 +1908,49 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">9_restox</option>
+        <option name="subFolderName">10_restox</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
     </workflowElement>
+    <workflowElement id="BatchExport" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="fileFormat">com.biomatters.plugins.textImporter.TextDocumentExporter</option>
+        <option name="optionsButton">Options</option>
+        <option name="folder" extra="C:\\Users\\funk0197\\Desktop,C:\\Users\\funk0197\\Desktop\\MRSA_RUN,">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        <option name="extension">.txt</option>
+        <option name="exportOptionsXml"></option>
+        <option name="exportToSingleFile">false</option>
+        <option name="singleFileName">results</option>
+      </Options>
+      <optionToExpose optionName="fileFormat" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">false</option>
+        <option name="saveInSubFolder">false</option>
+        <option name="subFolderName"></option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">branchFrom</option>
+        <option name="back">12</option>
+      </options>
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementGroupDocuments" />
+    <workflowElement id="MRSA_report_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <childOption name="options">
+          <option name="path_to_docker">C:\Program Files\Docker\Docker\resources\bin\docker.exe</option>
+          <option name="report_image">hydragenetics/common:3.1.1.1</option>
+          <option name="path_to_data">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="options.path_to_docker" label="" />
+    </workflowElement>
   </XMLSerialisableRootElement>
-  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="a3832ed2-43dc-47a3-b9e5-03ae69c6580e" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
+  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="7543ab3e-4402-49c9-b524-b9e42afca125" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementCustomCode">
       <code>import jebl.util.CompositeProgressListener;
 
