@@ -15,7 +15,7 @@ RESTOX_FILE_PATTERN = "_restox.txt$"
 SPA_FIELDS = ["#spa Type", "Repeats"]
 KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF"]
 RESTOX_FIELDS = ['reference','pos1','pos2','gene','count']
-REPORT_HEADER = ["sample"] + SPA_FIELDS + KROCUS_FIELDS + ["nuc", "pvl", "mecA", "mecC", "tst", "date"]
+REPORT_HEADER = ["sample"] + SPA_FIELDS + KROCUS_FIELDS + ["nuc", "pvl", "mecA", "mecC", "tst", "pvl quota mecA", "date"]
 EXCEL_FILE = os.path.join(FOLDER,"MRSA_results.xlsx")
 WORKSHEET_NAME = "MRSA_panel_results"
 
@@ -101,6 +101,19 @@ def read_krocus_txt(sample_dict, fields):
                         results[sample] = krocus_data
     return results
 
+def add_quota(results_dict):
+    """ Calculate and add quota to dict for nuc+mec/pvl """
+    for sample, gene in results_dict.items():
+        if results_dict.get(sample, {}).get('mecA') > results_dict.get(sample, {}).get('mecC'):
+            try:
+                pvl_quota_a = round(float((results_dict.get(sample, {}).get('nuc') + results_dict.get(sample, {}).get('mecA')) /2 / results_dict.get(sample, {}).get('pvl')),1)
+            except ZeroDivisionError:
+                pvl_quota_a = "NA"
+        else:
+            pvl_quota_a = "NA"
+        results_dict[sample]["pvl quota mecA"] = pvl_quota_a
+    return results_dict
+
 def combine_results(dict_list):
     """ Concatenate dicts with same keys """
     concat_dict = {}
@@ -154,8 +167,9 @@ krocus_results = read_krocus_txt(krocus_samples, KROCUS_FIELDS)
 
 restox_samples = create_sample_dict(FOLDER, RESTOX_FILE_PATTERN)
 restox_results = read_restox_txt(restox_samples, RESTOX_FIELDS)
+restox_results_updated = add_quota(restox_results)
 
-all_results = combine_results([spa_results, krocus_results, restox_results])
+all_results = combine_results([spa_results, krocus_results, restox_results_updated])
 
 
 ##### Write to excel  #####
