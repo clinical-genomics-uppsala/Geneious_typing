@@ -22,6 +22,7 @@ mount_path = os.path.join(path_to_geneious_data, ":/geneious").replace("\\", "/"
 # Other options
 path_to_docker = sys.argv[8].strip()
 spatyper_image = sys.argv[10].strip()
+database = sys.argv[12].strip()
 
 database_path = os.path.join(plugin_path, ":/database").replace("\\", "/")
 
@@ -37,17 +38,19 @@ def run_subprocess(command, name):
 
 
 # spatyper command:
-# python3 spatyper/spatyper.py -i /geneious/input.fasta -db /database/spatyper_db/ -o /geneious
+# python3 spatyper/spatyper.py -i /geneious/input.fasta -db /database/spatyper_db_yy-mm-dd/ -o /geneious
 spatyper = (
     "python3 spatyper/spatyper.py -i "
-    + str(os.path.join("/geneious", infile))
-    + " -db /database/spatyper_db/ -o /geneious"
+    + str(os.path.join("/geneious", infile).replace("\\", "/"))
+    + " -db "
+    + str(os.path.join("/database", database, "").replace("\\", "/"))
+    + " -o /geneious"
 )
 
 # Example subprocess input:
 # ['/usr/local/bin/docker', 'run', '--rm', '-v', '/Users/user/Geneious 2025.1 Data/transient/1750252290559/x/950/:/geneious', \
 # '-v', '/Users/user/Geneious 2025.1 Data/WrapperPluginDevelopment/spatyper/:/database', 'spatyper:2025-02-12', \
-# '/bin/bash', '-c', 'python3 spatyper/spatyper.py -i /geneious/input.fasta -db /database/spatyper_db/ -o /geneious']
+# '/bin/bash', '-c', 'python3 spatyper/spatyper.py -i /geneious/input.fasta -db /database/spatyper_db_yy-mm-dd/ -o /geneious']
 spatyper_subprocess = [
     path_to_docker,
     "run",

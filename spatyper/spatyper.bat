@@ -13,8 +13,9 @@ shift
 shift
 set path_to_docker=%4
 set spatyper_image=%6
+set database=%8
 
-python "%plugin_path%spatyper.py" -i %infile% -o %outfile% -g %path_to_geneious_data% -d %path_to_docker% -k %spatyper_image%
+python "%plugin_path%spatyper.py" -i %infile% -o %outfile% -g %path_to_geneious_data% -d %path_to_docker% -k %spatyper_image% -b %database%
 
 :: Wrapper Plugin Creator command line: -i [inputFileNames] -o spaType_results.tsv -g [inputFolderName] [otherOptions]
-:: path_to_docker spatyper_image
+:: path_to_docker spatyper_image database
