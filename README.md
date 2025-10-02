@@ -51,10 +51,10 @@ Under name select 'Copy name from: Sequence property' and 'Property: Sequence Na
 
 | Geneious_typing | image | software version |
 | -------- | ------- | ------- |
-| v.0.2.0 | build from spatyper/spatyper.Dockerfile | spaTyper 1.0.0 |
-| v.0.2.0 | quay.io/biocontainers/krocus:1.0.3--pyhdfd78af_0 | krocus 1.0.3 |
-| develop | hydragenetics/common:3.1.1.1 | bedtools v2.31.1 | 
-| develop | hydragenetics/common:3.1.1.1 | xlsxwriter 3.2.3 | 
+| v.0.3.0 | build from spatyper/spatyper.Dockerfile | spaTyper 1.0.0 |
+| v.0.3.0 | quay.io/biocontainers/krocus:1.0.3--pyhdfd78af_0 | krocus 1.0.3 |
+| v.0.3.0 | hydragenetics/common:3.1.1.1 | bedtools v2.31.1 | 
+| v.0.3.0 | hydragenetics/common:3.1.1.1 | xlsxwriter 3.2.3 | 
 
 ### 1. Create spatyper wrapper plugin
 Go to 'File' --> 'Create/Edit Wrapper Plugin..'. Press '+New'
