@@ -21,10 +21,10 @@ mount_path = os.path.join(path_to_geneious_data, ":/geneious").replace("\\", "/"
 
 # Other options
 path_to_docker = sys.argv[8].strip()
-spatyper_image = sys.argv[10].strip()
-database = sys.argv[12].strip()
+bedtools_image = sys.argv[10].strip()
 
-database_path = os.path.join(plugin_path, ":/database").replace("\\", "/")
+bedfile = sys.argv[12].strip()
+bedfile_path = os.path.join(plugin_path, ":/bedfiles").replace("\\", "/")
 
 
 def run_subprocess(command, name):
@@ -37,37 +37,32 @@ def run_subprocess(command, name):
     return output, p_status
 
 
-# spatyper command:
-# python3 spatyper/spatyper.py -i /geneious/input.fasta -db /database/spatyper_db_yy-mm-dd/ -o /geneious
-spatyper = (
-    "python3 spatyper/spatyper.py -i "
+# bedtools multicov -bams *.bam -bed  /path/to/restox_primers.bed > amplicon_counts.tsv
+bedtools_multicov = (
+    "bedtools multicov -bams "
     + str(os.path.join("/geneious", infile).replace("\\", "/"))
-    + " -db "
-    + str(os.path.join("/database", database, "").replace("\\", "/"))
-    + " -o /geneious"
+    + " -bed "  
+    + str(os.path.join("/bedfiles", bedfile).replace("\\", "/"))
+    + "  > /geneious/counts.tsv"
 )
 
-# Example subprocess input:
-# ['/usr/local/bin/docker', 'run', '--rm', '-v', '/Users/user/Geneious 2025.1 Data/transient/1750252290559/x/950/:/geneious', \
-# '-v', '/Users/user/Geneious 2025.1 Data/WrapperPluginDevelopment/spatyper/:/database', 'spatyper:2025-02-12', \
-# '/bin/bash', '-c', 'python3 spatyper/spatyper.py -i /geneious/input.fasta -db /database/spatyper_db_yy-mm-dd/ -o /geneious']
-spatyper_subprocess = [
+bedtools_subprocess = [
     path_to_docker,
     "run",
     "--rm",
     "-v",
     mount_path,
     "-v",
-    database_path,
-    spatyper_image,
+    bedfile_path,
+    bedtools_image,
     "/bin/bash",
     "-c",
-    spatyper,
+    bedtools_multicov,
 ]
 
-run_subprocess(spatyper_subprocess, "spatyper")
+run_subprocess(bedtools_subprocess, "bedtools_multicov")
 
 stop_time = datetime.datetime.now()
 print(
-    f"spatyper completed {stop_time.strftime('%Y-%m-%d %H:%M:%S')} taking {stop_time - start_time}"
+    f"bedtools completed {stop_time.strftime('%Y-%m-%d %H:%M:%S')} taking {stop_time - start_time}"
 )

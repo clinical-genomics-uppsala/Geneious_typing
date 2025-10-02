@@ -1,5 +1,5 @@
 <geneiousWorkflows>
-  <XMLSerialisableRootElement name="MRSA panel 2025-07-30" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="17bce539-6c70-441d-9ee7-50f26354db65" revisionNumber="16" description="" bundledIconName="plugin">
+  <XMLSerialisableRootElement name="MRSA panel" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="7314740f-7028-4187-a7a5-cc7a692dd6ca" revisionNumber="40" sharedToCloud="true" wasEverSharedToCloud="true" description="https://github.com/clinical-genomics-uppsala/Geneious_typing" bundledIconName="plugin">
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="filterWhat">eachSequence</option>
@@ -62,7 +62,21 @@
       </Options>
       <optionToExpose optionName="advancedCheckbox" label="" />
     </workflowElement>
-    <workflowElement id="BBDuk" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">number_of_sequences</option>
+            <option name="condition">greater_than</option>
+            <option name="value">1</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="BBDuk" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="true" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="trimAdapters">false</option>
         <option name="qualityTrim">true</option>
@@ -72,7 +86,7 @@
         <option name="keepOrder">true</option>
         <option name="customComponent1" />
         <option name="memoryToAllocate">1000</option>
-        <option name="additionalOptions">maq=19</option>
+        <option name="additionalOptions">maq=15</option>
         <option name="customComponent2" />
         <childOption name="adapterTrimming">
           <option name="adapters">inMemoryDocument__|urn:local:BBDukOptions:adapters.fa|All Truseq, Nextera and PhiX adapters___</option>
@@ -448,7 +462,7 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">1_minimap_spa</option>
+        <option name="subFolderName">01_minimap_spa</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -503,9 +517,9 @@
         </childOption>
         <childOption name="advancedSuperOptions">
           <option name="replaceWhatTypeRadioOption">matchesOption</option>
-          <option name="replaceWhatTextField"> </option>
-          <option name="ignoreCaseCheckbox">true</option>
-          <option name="isRegexCheckbox">false</option>
+          <option name="replaceWhatTextField">\s</option>
+          <option name="ignoreCaseCheckbox">false</option>
+          <option name="isRegexCheckbox">true</option>
           <option name="replaceWithTextField">_</option>
           <option name="plusButton">Add Property...</option>
         </childOption>
@@ -831,7 +845,72 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">2_spa_de_novo</option>
+        <option name="subFolderName">02_spa_de_novo</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">filterDocumentTypeField</option>
+            <option name="condition">contains</option>
+            <option name="value">Nucleotide</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="Operation_com.biomatters.plugins.featureFinder.FeatureFinder_NUCLEOTIDE" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="source">LocalDocuments/MRSA panel/References/ridom_spa_repeats_2025-09-09</option>
+        <option name="similarity">100</option>
+        <option name="name">[]</option>
+        <option name="whatToFind">bestMatch</option>
+        <option name="customComponent1" />
+        <option name="applyToReferencedSequences">false</option>
+        <childOption name="sourceDatabase">
+          <option name="nucleotideSearch">true</option>
+          <option name="proteinSearch">false</option>
+          <option name="searchSubfolders">false</option>
+          <option name="includeTruncatedAnnotations">false</option>
+          <option name="createMiscFeatureFromUnannotatedSource">false</option>
+        </childOption>
+        <childOption name="searchParameters">
+          <option name="gateway">true</option>
+          <option name="validateCDS">true</option>
+          <option name="maxAdjustmentForORFs">50</option>
+          <option name="mergeIntervalsOverlapPercent">75</option>
+          <option name="nucleotideWordSize">10</option>
+          <option name="translationWordSizeOption">4</option>
+        </childOption>
+        <childOption name="types">
+          <option name="onlyAnnotate">false</option>
+          <option name="onlyAnnotateTypes">Gene</option>
+          <option name="dontAnnotateTypes">Coverage - High
+Coverage - Low
+CRISPR.
+Editing History
+Expression Difference
+Expression Level
+Optimized Codon
+overhang
+Polymorphism
+trimmed</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="source" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">03_spa_de_novo_annotated</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -852,7 +931,7 @@
       </Options>
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
-    <workflowElement id="Randomly Sample Sequences_7b9d9b9e-7582-45b4-a8c2-53d322549cee" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_c09e9964-b9c4-4a42-974b-b55878f678a1" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -898,9 +977,9 @@
         </childOption>
         <childOption name="advancedSuperOptions">
           <option name="replaceWhatTypeRadioOption">matchesOption</option>
-          <option name="replaceWhatTextField"> </option>
-          <option name="ignoreCaseCheckbox">true</option>
-          <option name="isRegexCheckbox">false</option>
+          <option name="replaceWhatTextField">\s</option>
+          <option name="ignoreCaseCheckbox">false</option>
+          <option name="isRegexCheckbox">true</option>
           <option name="replaceWithTextField">_</option>
           <option name="plusButton">Add Property...</option>
         </childOption>
@@ -954,24 +1033,45 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">3_input_spatyper</option>
+        <option name="subFolderName">04_input_spatyper</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
     </workflowElement>
-    <workflowElement id="spatyper_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
+    <workflowElement id="spatyper_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <childOption name="options">
+          <option name="path_to_docker">C:\Program Files\Docker\Docker\resources\bin\docker.exe</option>
+          <option name="spatyper_image">spatyper:2025-07-29</option>
+          <option name="database">spatyper_db_2023-06-19</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="options.path_to_docker" label="" />
+    </workflowElement>
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">4_spatyper</option>
+        <option name="subFolderName">05_spatyper</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
+    </workflowElement>
+    <workflowElement id="BatchExport" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="fileFormat">com.biomatters.plugins.textImporter.TextDocumentExporter</option>
+        <option name="optionsButton">Options</option>
+        <option name="folder" extra="C:\\Users\\funk0197\\Desktop\\MRSA_RUN,">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        <option name="extension">.txt</option>
+        <option name="exportOptionsXml" />
+        <option name="exportToSingleFile">false</option>
+        <option name="singleFileName">results</option>
+      </Options>
+      <optionToExpose optionName="fileFormat" label="" />
     </workflowElement>
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
       <options>
@@ -981,7 +1081,7 @@
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">branchFrom</option>
-        <option name="back">12</option>
+        <option name="back">16</option>
       </options>
     </workflowElement>
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
@@ -1300,7 +1400,7 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">5_minimap_mlst</option>
+        <option name="subFolderName">06_minimap_mlst</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
@@ -1322,7 +1422,7 @@
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
     <workflowElement id="ExtractNonReferenceSequencesOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
-    <workflowElement id="Randomly Sample Sequences_7b9d9b9e-7582-45b4-a8c2-53d322549cee" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_c09e9964-b9c4-4a42-974b-b55878f678a1" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -1368,9 +1468,9 @@
         </childOption>
         <childOption name="advancedSuperOptions">
           <option name="replaceWhatTypeRadioOption">matchesOption</option>
-          <option name="replaceWhatTextField"> </option>
-          <option name="ignoreCaseCheckbox">true</option>
-          <option name="isRegexCheckbox">false</option>
+          <option name="replaceWhatTextField">\s</option>
+          <option name="ignoreCaseCheckbox">false</option>
+          <option name="isRegexCheckbox">true</option>
           <option name="replaceWithTextField">_</option>
           <option name="plusButton">Add Property...</option>
         </childOption>
@@ -1424,24 +1524,45 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">6_mlst_reads_for_krocus</option>
+        <option name="subFolderName">07_mlst_reads_for_krocus</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
     </workflowElement>
-    <workflowElement id="krocus_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
+    <workflowElement id="krocus_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <childOption name="options">
+          <option name="path_to_docker">C:\Program Files\Docker\Docker\resources\bin\docker.exe</option>
+          <option name="krocus_image">quay.io/biocontainers/krocus:1.0.3--pyhdfd78af_0</option>
+          <option name="database">Staphylococcus_aureus_2025-07-30</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="options.path_to_docker" label="" />
+    </workflowElement>
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">7_krocus</option>
+        <option name="subFolderName">08_krocus</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
+    </workflowElement>
+    <workflowElement id="BatchExport" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="fileFormat">com.biomatters.plugins.textImporter.TextDocumentExporter</option>
+        <option name="optionsButton">Options</option>
+        <option name="folder" extra="C:\\Users\\funk0197\\Desktop\\MRSA_RUN,">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        <option name="extension">.txt</option>
+        <option name="exportOptionsXml" />
+        <option name="exportToSingleFile">false</option>
+        <option name="singleFileName">results</option>
+      </Options>
+      <optionToExpose optionName="fileFormat" label="" />
     </workflowElement>
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
       <options>
@@ -1451,7 +1572,7 @@
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">branchFrom</option>
-        <option name="back">9</option>
+        <option name="back">10</option>
       </options>
     </workflowElement>
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
@@ -1477,7 +1598,7 @@
         <childOption name="data">
           <option name="reassemble">true</option>
           <option name="useReferenceSequence">true</option>
-          <option name="referenceSequenceName">urn:local:.:1c-jgvlz9r</option>
+          <option name="referenceSequenceName">urn:local:.:cd-jl0gv2t</option>
           <option name="customComponent1" />
           <option name="customComponent2" />
           <option name="customComponent3" />
@@ -1770,15 +1891,84 @@
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">true</option>
-        <option name="subFolderName">8_minimap_others</option>
+        <option name="subFolderName">09_minimap_restox</option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">continue</option>
         <option name="back">2</option>
       </options>
     </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachDocument</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">filterDocumentTypeField</option>
+            <option name="condition">is</option>
+            <option name="value">Contig</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement id="bedtools_multicov_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <childOption name="options">
+          <option name="path_to_docker">C:\Program Files\Docker\Docker\resources\bin\docker.exe</option>
+          <option name="bedtools_image">hydragenetics/common:3.1.1.1</option>
+          <option name="bedfile">restox_primers.bed</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="options.path_to_docker" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">true</option>
+        <option name="subFolderName">10_restox</option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">continue</option>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="BatchExport" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="fileFormat">com.biomatters.plugins.textImporter.TextDocumentExporter</option>
+        <option name="optionsButton">Options</option>
+        <option name="folder" extra="C:\\Users\\funk0197\\Desktop,C:\\Users\\funk0197\\Desktop\\MRSA_RUN,">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        <option name="extension">.txt</option>
+        <option name="exportOptionsXml" />
+        <option name="exportToSingleFile">false</option>
+        <option name="singleFileName">results</option>
+      </Options>
+      <optionToExpose optionName="fileFormat" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">false</option>
+        <option name="saveInSubFolder">false</option>
+        <option name="subFolderName" />
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">branchFrom</option>
+        <option name="back">12</option>
+      </options>
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementGroupDocuments" />
+    <workflowElement id="MRSA_report_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <childOption name="options">
+          <option name="path_to_docker">C:\Program Files\Docker\Docker\resources\bin\docker.exe</option>
+          <option name="report_image">hydragenetics/common:3.1.1.1</option>
+          <option name="path_to_data">C:\Users\funk0197\Desktop\MRSA_RUN</option>
+        </childOption>
+      </Options>
+      <optionToExpose optionName="options.path_to_docker" label="" />
+    </workflowElement>
   </XMLSerialisableRootElement>
-  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="7b9d9b9e-7582-45b4-a8c2-53d322549cee" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
+  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="c09e9964-b9c4-4a42-974b-b55878f678a1" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementCustomCode">
       <code>import jebl.util.CompositeProgressListener;
 
