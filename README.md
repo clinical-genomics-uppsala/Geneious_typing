@@ -161,6 +161,9 @@ Go to 'File' --> 'Create/Edit Wrapper Plugin..'. Press '+New'
 5. Add the spatyper, krocus, bedtools_multicov and MRSA_report plugins to their respective steps in the workflow
 6. Edit the path to the three export steps (must be the same as path_to_data in the MRSA_report plugin)
 
+## Update spatyper_db
+Instructions for updating spatyper_db [here](spatyper/spatyper_db).
+
 ## Acknowledgements
 
 Thanks to Rene Kaden and Max Koivistoinen Jonsson for inital work and providing the reference sequence.
