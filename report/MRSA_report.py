@@ -10,7 +10,7 @@ import xlsxwriter
 ##### Constants #####
 FOLDER = sys.argv[1]
 SPA_FILE_PATTERN = "_spa.txt$"
-KROCUS_FILE_PATTERN = "_\S{1,5}_sequences.txt$"
+KROCUS_FILE_PATTERN = "_[0-9,]{1,7}_sequences.txt$" # up to 999 999 sequences
 RESTOX_FILE_PATTERN = "_restox.txt$"
 SPA_FIELDS = ["#spa Type", "Repeats"]
 KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF"]
