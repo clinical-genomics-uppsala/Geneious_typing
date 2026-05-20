@@ -1,5 +1,5 @@
 <geneiousWorkflows>
-  <XMLSerialisableRootElement name="MRSA panel" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="7314740f-7028-4187-a7a5-cc7a692dd6ca" revisionNumber="40" sharedToCloud="true" wasEverSharedToCloud="true" description="https://github.com/clinical-genomics-uppsala/Geneious_typing" bundledIconName="plugin">
+  <XMLSerialisableRootElement name="MRSA panel" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="d8f0fc28-a1c9-4125-a4fb-47d73ed68718" revisionNumber="51" sharedToCloud="true" wasEverSharedToCloud="true" description="&lt;html&gt;https://github.com/clinical-genomics-uppsala/Geneious_typing v. 0.4.1&lt;/html&gt;" bundledIconName="plugin">
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="filterWhat">eachSequence</option>
@@ -868,7 +868,7 @@
     </workflowElement>
     <workflowElement id="Operation_com.biomatters.plugins.featureFinder.FeatureFinder_NUCLEOTIDE" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
-        <option name="source">LocalDocuments/MRSA panel/References/ridom_spa_repeats_2025-09-09</option>
+        <option name="source">LocalDocuments/MRSA amplikonsekvensering/References/ridom_spa_repeats_2025-09-09</option>
         <option name="similarity">100</option>
         <option name="name">[]</option>
         <option name="whatToFind">bestMatch</option>
@@ -931,7 +931,7 @@ trimmed</option>
       </Options>
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
-    <workflowElement id="Randomly Sample Sequences_c09e9964-b9c4-4a42-974b-b55878f678a1" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_3e8cd942-dad1-46b6-8cbb-07dbeb0ac9bb" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -1045,7 +1045,7 @@ trimmed</option>
         <childOption name="options">
           <option name="path_to_docker">C:\Program Files\Docker\Docker\resources\bin\docker.exe</option>
           <option name="spatyper_image">spatyper:2025-07-29</option>
-          <option name="database">spatyper_db_2023-06-19</option>
+          <option name="database">spatyper_db_2025-10-15</option>
         </childOption>
       </Options>
       <optionToExpose optionName="options.path_to_docker" label="" />
@@ -1422,7 +1422,7 @@ trimmed</option>
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
     <workflowElement id="ExtractNonReferenceSequencesOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
-    <workflowElement id="Randomly Sample Sequences_c09e9964-b9c4-4a42-974b-b55878f678a1" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_3e8cd942-dad1-46b6-8cbb-07dbeb0ac9bb" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -1898,7 +1898,7 @@ trimmed</option>
         <option name="back">2</option>
       </options>
     </workflowElement>
-    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="true" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="filterWhat">eachDocument</option>
         <option name="match">all</option>
@@ -1908,11 +1908,16 @@ trimmed</option>
             <option name="condition">is</option>
             <option name="value">Contig</option>
           </value>
+          <value>
+            <option name="field">number_of_sequences</option>
+            <option name="condition">greater_than</option>
+            <option name="value">2</option>
+          </value>
         </multiOption>
       </Options>
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
-    <workflowElement id="bedtools_multicov_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="bedtools_multicov_Ida_Karlsson" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="true" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <childOption name="options">
           <option name="path_to_docker">C:\Program Files\Docker\Docker\resources\bin\docker.exe</option>
@@ -1968,7 +1973,7 @@ trimmed</option>
       <optionToExpose optionName="options.path_to_docker" label="" />
     </workflowElement>
   </XMLSerialisableRootElement>
-  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="c09e9964-b9c4-4a42-974b-b55878f678a1" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
+  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="3e8cd942-dad1-46b6-8cbb-07dbeb0ac9bb" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementCustomCode">
       <code>import jebl.util.CompositeProgressListener;
 
