@@ -80,25 +80,25 @@ def read_krocus_txt(sample_dict, fields):
         with open(file, 'r') as csvfile:
                 csvreader = csv.DictReader(csvfile, delimiter='\t', fieldnames=fields, restval="NA")
                 sorted_rows = sorted(csvreader, key=lambda d: float(d['coverage']), reverse=True)
-                for s, row in enumerate(sorted_rows, start=1):
-                    if s == 1:
-                        krocus_data = {gene: row[gene] for gene in fields[0:2]}
+                best_row = sorted_rows[0]
 
-                        # Initialize all allele values with 'NA'
-                        for gene in fields[2:]:
-                            krocus_data[gene] = "NA"
+                st_fields = fields[:2]
+                allele_fields = fields[2:]
+                # Start with ST and coverage
+                krocus_data = {gene: best_row[gene] for gene in st_fields}
+                # Initialize all allele values with 'NA'
+                krocus_data.update({gene: "NA" for gene in allele_fields})
 
-                        # Try to match each value to a fieldname
-                        for value in row.values():
-                            match = re.match("(^\S+)\(", str(value).lower())
-                            if match:
-                                gene_name = match.group(1)
-                                for gene in fields[2:]:
-                                    if gene.lower() == gene_name and krocus_data[gene] == "NA":
-                                        krocus_data[gene] = value
-                                        break
-
-                        results[sample] = krocus_data
+                # Try to match each value to a fieldname
+                for value in best_row.values():
+                    match = re.match("(^\S+)\(", str(value).lower())
+                    if match:
+                        gene_name = match.group(1)
+                        for gene in allele_fields:
+                            if gene.lower() == gene_name and krocus_data[gene] == "NA":
+                                krocus_data[gene] = value
+                                break
+                results[sample] = krocus_data
     return results
 
 def add_quota(results_dict):
