@@ -6,14 +6,15 @@ import csv
 import re
 import datetime
 import xlsxwriter
+#from pathlib import Path
 
 ##### Constants #####
 FOLDER = sys.argv[1]
 SPA_FILE_PATTERN = "_spa.txt$"
-KROCUS_FILE_PATTERN = "_[0-9,]{1,7}_sequences.txt$" # up to 999 999 sequences
+KROCUS_FILE_PATTERN = "(_[0-9,]{1,7}_sequences.txt$)" # up to 999 999 sequences
 RESTOX_FILE_PATTERN = "_restox.txt$"
 SPA_FIELDS = ["#spa Type", "Repeats"]
-KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF"]
+KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF","mlst_reads"]
 RESTOX_FIELDS = ['reference','pos1','pos2','gene','count']
 REPORT_HEADER = ["sample"] + SPA_FIELDS + KROCUS_FIELDS + ["nuc", "pvl", "mecA", "mecC", "tst", "pvl quota mecA", "date"]
 EXCEL_FILE = os.path.join(FOLDER,"MRSA_results.xlsx")
@@ -67,6 +68,11 @@ def read_restox_txt(sample_dict, fields):
                 results[sample][gene] = int(count)
     return results
 
+def get_krocus_reads(sample, sample_dict):
+    file_ending = re.split(KROCUS_FILE_PATTERN, os.path.basename(sample_dict[sample]))[1].strip()
+    krocus_reads =  int(re.split("_", file_ending)[1].replace(",",""))
+    return krocus_reads
+
 def read_krocus_txt(sample_dict, fields):
     """
         Read krocus txt file and get ST and alleles for the best coverage row
@@ -83,7 +89,7 @@ def read_krocus_txt(sample_dict, fields):
                 best_row = sorted_rows[0]
 
                 st_fields = fields[:2]
-                allele_fields = fields[2:]
+                allele_fields = fields[2:9]
                 # Start with ST and coverage
                 krocus_data = {gene: best_row[gene] for gene in st_fields}
                 # Initialize all allele values with 'NA'
@@ -98,6 +104,8 @@ def read_krocus_txt(sample_dict, fields):
                             if gene.lower() == gene_name and krocus_data[gene] == "NA":
                                 krocus_data[gene] = value
                                 break
+                # Add no of MLST reads used by krocus
+                krocus_data[fields[9]] = get_krocus_reads(sample, sample_dict)
                 results[sample] = krocus_data
     return results
 
