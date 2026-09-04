@@ -10,10 +10,10 @@ import xlsxwriter
 
 ##### Constants #####
 FOLDER = sys.argv[1]
-SPA_FILE_PATTERN = "_spa.txt$"
+SPA_FILE_PATTERN = "(_[0-9,]{1,7}_spa.txt$)" # up to 999 999 sequences
 KROCUS_FILE_PATTERN = "(_[0-9,]{1,7}_sequences.txt$)" # up to 999 999 sequences
 RESTOX_FILE_PATTERN = "_restox.txt$"
-SPA_FIELDS = ["#spa Type", "Repeats"]
+SPA_FIELDS = ["spa_reads_contig1","#spa Type", "Repeats"]
 KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF","mlst_reads"]
 RESTOX_FIELDS = ['reference','pos1','pos2','gene','count']
 REPORT_HEADER = ["sample"] + SPA_FIELDS + KROCUS_FIELDS + ["nuc", "pvl", "mecA", "mecC", "tst", "pvl quota mecA", "date"]
@@ -32,6 +32,12 @@ def create_sample_dict(folder, ending):
     sample_dict = dict(sorted(sample_dict.items()))  # sort by sample name
     return sample_dict
 
+def get_no_reads(sample, sample_dict, pattern):
+    ''' Get the number of reads from file name'''
+    file_ending = re.split(pattern, os.path.basename(sample_dict[sample]))[1].strip()
+    no_reads =  int(re.split("_", file_ending)[1].replace(",",""))
+    return no_reads
+
 def read_spa_txt(sample_dict, fields):
     """
         Read spa txt file and get spa type and repeats
@@ -44,11 +50,12 @@ def read_spa_txt(sample_dict, fields):
             next(csvfile)
             csvreader = csv.DictReader(csvfile, delimiter='\t')
             for row in csvreader:
-                spa_data = {gene: row[gene] for gene in fields}
+                spa_data = {gene: row[gene] for gene in fields[1:]}
                 results[sample] = {
                     **spa_data
                 }
                 break
+        results[sample][fields[0]] = get_no_reads(sample, sample_dict, SPA_FILE_PATTERN)
     return results
 
 def read_restox_txt(sample_dict, fields):
@@ -67,11 +74,6 @@ def read_restox_txt(sample_dict, fields):
                 count = row['count']
                 results[sample][gene] = int(count)
     return results
-
-def get_krocus_reads(sample, sample_dict):
-    file_ending = re.split(KROCUS_FILE_PATTERN, os.path.basename(sample_dict[sample]))[1].strip()
-    krocus_reads =  int(re.split("_", file_ending)[1].replace(",",""))
-    return krocus_reads
 
 def read_krocus_txt(sample_dict, fields):
     """
@@ -105,7 +107,7 @@ def read_krocus_txt(sample_dict, fields):
                                 krocus_data[gene] = value
                                 break
                 # Add no of MLST reads used by krocus
-                krocus_data[fields[9]] = get_krocus_reads(sample, sample_dict)
+                krocus_data[fields[9]] = get_no_reads(sample, sample_dict, KROCUS_FILE_PATTERN)
                 results[sample] = krocus_data
     return results
 
