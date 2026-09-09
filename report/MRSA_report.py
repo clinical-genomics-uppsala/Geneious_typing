@@ -6,14 +6,13 @@ import csv
 import re
 import datetime
 import xlsxwriter
-#from pathlib import Path
 
 ##### Constants #####
 FOLDER = sys.argv[1]
 SPA_FILE_PATTERN = "(_[0-9,]{1,7}_spa.txt$)" # up to 999 999 sequences
 KROCUS_FILE_PATTERN = "(_[0-9,]{1,7}_sequences.txt$)" # up to 999 999 sequences
 RESTOX_FILE_PATTERN = "_restox.txt$"
-SPA_FIELDS = ["spa_reads_contig1","#spa Type", "Repeats"]
+SPA_FIELDS = ["#spa Type", "Repeats","spa_reads_contig1"]
 KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF","mlst_reads"]
 RESTOX_FIELDS = ['reference','pos1','pos2','gene','count']
 REPORT_HEADER = ["sample"] + SPA_FIELDS + KROCUS_FIELDS + ["nuc", "pvl", "mecA", "mecC", "tst", "pvl quota mecA", "date"]
@@ -43,6 +42,7 @@ def read_spa_txt(sample_dict, fields):
         Read spa txt file and get spa type and repeats
         File with two-line header
         Return a nested dict with sample names and spa results
+        Add the number of spa reads in contig1 from the filename
     """
     results = {}
     for sample, file in sample_dict.items():
@@ -50,12 +50,12 @@ def read_spa_txt(sample_dict, fields):
             next(csvfile)
             csvreader = csv.DictReader(csvfile, delimiter='\t')
             for row in csvreader:
-                spa_data = {gene: row[gene] for gene in fields[1:]}
+                spa_data = {gene: row[gene] for gene in fields[0:2]}
                 results[sample] = {
                     **spa_data
                 }
                 break
-        results[sample][fields[0]] = get_no_reads(sample, sample_dict, SPA_FILE_PATTERN)
+        results[sample][fields[2]] = get_no_reads(sample, sample_dict, SPA_FILE_PATTERN)
     return results
 
 def read_restox_txt(sample_dict, fields):
@@ -82,6 +82,7 @@ def read_krocus_txt(sample_dict, fields):
         Get row with highest coverage
         Return a nested dict with sample names, ST, coverage and alleles
         When no allele is found add NA to dict
+        Add the number of MLST reads from the filename
     """
     results = {}
     for sample, file in sample_dict.items():
