@@ -1,5 +1,5 @@
 <geneiousWorkflows>
-  <XMLSerialisableRootElement name="MRSA panel" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="d8f0fc28-a1c9-4125-a4fb-47d73ed68718" revisionNumber="51" sharedToCloud="true" wasEverSharedToCloud="true" description="&lt;html&gt;https://github.com/clinical-genomics-uppsala/Geneious_typing v. 0.4.1&lt;/html&gt;" bundledIconName="plugin">
+  <XMLSerialisableRootElement name="MRSA panel" author="Ida Karlsson" geneiousVersion="2024.0.7" uniqueId="246c68e2-aae9-415b-a02c-6caafa0ff26a" revisionNumber="55" sharedToCloud="true" wasEverSharedToCloud="true" description="&lt;html&gt;https://github.com/clinical-genomics-uppsala/Geneious_typing v. 0.5.0&lt;/html&gt;" bundledIconName="plugin">
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="filterWhat">eachSequence</option>
@@ -931,7 +931,7 @@ trimmed</option>
       </Options>
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
-    <workflowElement id="Randomly Sample Sequences_3e8cd942-dad1-46b6-8cbb-07dbeb0ac9bb" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_8431992b-d72d-4ddd-acba-6afcb12be6ba" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -943,10 +943,41 @@ trimmed</option>
       </Options>
       <optionToExpose optionName="divider_1" label="" />
     </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementSaveAndContinue">
+      <options>
+        <option name="save">true</option>
+        <option name="saveInSubFolder">false</option>
+        <option name="subFolderName"></option>
+        <option name="addVariable">Include Name...</option>
+        <option name="selectDocuments">false</option>
+        <option name="doWhat">branchFrom</option>
+        <option name="back">3</option>
+      </options>
+    </workflowElement>
+    <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+      <Options>
+        <option name="filterWhat">eachSequence</option>
+        <option name="match">all</option>
+        <multiOption name="filter">
+          <value>
+            <option name="field">filterDocumentTypeField</option>
+            <option name="condition">is</option>
+            <option name="value">Nucleotide sequence</option>
+          </value>
+        </multiOption>
+      </Options>
+      <optionToExpose optionName="filterWhat" label="" />
+    </workflowElement>
+    <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementCombineWithEarlierDocuments">
+      <options>
+        <option name="back">2</option>
+      </options>
+    </workflowElement>
+    <workflowElement forEachSequenceInsteadOfDocument="true" type="com.biomatters.plugins.workflows.WorkflowElementForEach" />
     <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="advancedCheckbox">true</option>
-        <option name="customComponent1" />
+        <option name="customComponent1"></option>
         <childOption name="renameMethodChildOptions">
           <option name="selectedRenameMethod">renamableOption2</option>
           <childOption name="BatchRenameSubOptions0">
@@ -966,21 +997,21 @@ trimmed</option>
         <childOption name="basicSuperOptions">
           <option name="task">replaceWithRadioButton</option>
           <option name="r1">fieldOptioncache_name</option>
-          <option name="rSep" />
+          <option name="rSep"></option>
           <option name="r2">nothingSelectedOption</option>
-          <option name="rSep2" />
+          <option name="rSep2"></option>
           <option name="r3">nothingSelectedOption</option>
-          <option name="appendTextField" />
+          <option name="appendTextField"></option>
           <option name="appendPositionComboBox">endValue</option>
           <option name="removeHowMuchIntegerOption">1</option>
           <option name="removePositionComboBox">endValue</option>
         </childOption>
         <childOption name="advancedSuperOptions">
           <option name="replaceWhatTypeRadioOption">matchesOption</option>
-          <option name="replaceWhatTextField">\s</option>
+          <option name="replaceWhatTextField"> Contig 1</option>
           <option name="ignoreCaseCheckbox">false</option>
           <option name="isRegexCheckbox">true</option>
-          <option name="replaceWithTextField">_</option>
+          <option name="replaceWithTextField"></option>
           <option name="plusButton">Add Property...</option>
         </childOption>
       </Options>
@@ -989,7 +1020,7 @@ trimmed</option>
     <workflowElement id="batchRename" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="advancedCheckbox">true</option>
-        <option name="customComponent1" />
+        <option name="customComponent1"></option>
         <childOption name="renameMethodChildOptions">
           <option name="selectedRenameMethod">renamableOption2</option>
           <childOption name="BatchRenameSubOptions0">
@@ -1009,21 +1040,21 @@ trimmed</option>
         <childOption name="basicSuperOptions">
           <option name="task">replaceWithRadioButton</option>
           <option name="r1">fieldOptioncache_name</option>
-          <option name="rSep" />
+          <option name="rSep"></option>
           <option name="r2">nothingSelectedOption</option>
-          <option name="rSep2" />
+          <option name="rSep2"></option>
           <option name="r3">nothingSelectedOption</option>
-          <option name="appendTextField" />
+          <option name="appendTextField"></option>
           <option name="appendPositionComboBox">endValue</option>
           <option name="removeHowMuchIntegerOption">1</option>
           <option name="removePositionComboBox">endValue</option>
         </childOption>
         <childOption name="advancedSuperOptions">
-          <option name="replaceWhatTypeRadioOption">matchesOption</option>
+          <option name="replaceWhatTypeRadioOption">entireFieldOption</option>
           <option name="replaceWhatTextField">(^1_sequences_from_)(\S+)(_Consensus_Sequences$)</option>
           <option name="ignoreCaseCheckbox">false</option>
           <option name="isRegexCheckbox">true</option>
-          <option name="replaceWithTextField">{match[2]}</option>
+          <option name="replaceWithTextField">{$cache__name_APD}_{$number__of__source__sequences_APD}</option>
           <option name="plusButton">Add Property...</option>
         </childOption>
       </Options>
@@ -1077,11 +1108,11 @@ trimmed</option>
       <options>
         <option name="save">true</option>
         <option name="saveInSubFolder">false</option>
-        <option name="subFolderName" />
+        <option name="subFolderName"></option>
         <option name="addVariable">Include Name...</option>
         <option name="selectDocuments">false</option>
         <option name="doWhat">branchFrom</option>
-        <option name="back">16</option>
+        <option name="back">20</option>
       </options>
     </workflowElement>
     <workflowElement id="FilterOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
@@ -1422,7 +1453,7 @@ trimmed</option>
       <optionToExpose optionName="filterWhat" label="" />
     </workflowElement>
     <workflowElement id="ExtractNonReferenceSequencesOperation" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement" />
-    <workflowElement id="Randomly Sample Sequences_3e8cd942-dad1-46b6-8cbb-07dbeb0ac9bb" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
+    <workflowElement id="Randomly Sample Sequences_8431992b-d72d-4ddd-acba-6afcb12be6ba" exposeNoOptions="true" exposeAllOptions="false" suppressErrors="false" showButtonForExposedGroup="false" groupNameForExposedOptions="" type="com.biomatters.plugins.workflows.DocumentOperationWorkflowElement">
       <Options>
         <option name="divider_1" />
         <childOption name="0">
@@ -1973,7 +2004,7 @@ trimmed</option>
       <optionToExpose optionName="options.path_to_docker" label="" />
     </workflowElement>
   </XMLSerialisableRootElement>
-  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="3e8cd942-dad1-46b6-8cbb-07dbeb0ac9bb" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
+  <XMLSerialisableRootElement name="Randomly Sample Sequences" geneiousVersion="2024.0.7" uniqueId="8431992b-d72d-4ddd-acba-6afcb12be6ba" revisionNumber="5" description="&lt;html&gt;&lt;center&gt;&#xA;Randomly samples  (without replacement) a specified number of sequences&lt;br&gt;&#xA;from a list. If a selected read is paired, the mate sequence is included next.&lt;/center&gt;&lt;/html&gt;" bundledIconName="nucleotideList">
     <workflowElement type="com.biomatters.plugins.workflows.WorkflowElementCustomCode">
       <code>import jebl.util.CompositeProgressListener;
 

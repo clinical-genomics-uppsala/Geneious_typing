@@ -9,11 +9,11 @@ import xlsxwriter
 
 ##### Constants #####
 FOLDER = sys.argv[1]
-SPA_FILE_PATTERN = "_spa.txt$"
-KROCUS_FILE_PATTERN = "_[0-9,]{1,7}_sequences.txt$" # up to 999 999 sequences
+SPA_FILE_PATTERN = "(_[0-9,]{1,7}_spa.txt$)" # up to 999 999 sequences
+KROCUS_FILE_PATTERN = "(_[0-9,]{1,7}_sequences.txt$)" # up to 999 999 sequences
 RESTOX_FILE_PATTERN = "_restox.txt$"
-SPA_FIELDS = ["#spa Type", "Repeats"]
-KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF"]
+SPA_FIELDS = ["#spa Type", "Repeats","spa_reads_contig1"]
+KROCUS_FIELDS = ["sequence type", "coverage", "yqiL", "gmk", "aroE", "pta", "arcC", "tpi", "glpF","mlst_reads"]
 RESTOX_FIELDS = ['reference','pos1','pos2','gene','count']
 REPORT_HEADER = ["sample"] + SPA_FIELDS + KROCUS_FIELDS + ["nuc", "pvl", "mecA", "mecC", "tst", "pvl quota mecA", "date"]
 EXCEL_FILE = os.path.join(FOLDER,"MRSA_results.xlsx")
@@ -31,11 +31,18 @@ def create_sample_dict(folder, ending):
     sample_dict = dict(sorted(sample_dict.items()))  # sort by sample name
     return sample_dict
 
+def get_no_reads(sample, sample_dict, pattern):
+    ''' Get the number of reads from file name'''
+    file_ending = re.split(pattern, os.path.basename(sample_dict[sample]))[1].strip()
+    no_reads =  int(re.split("_", file_ending)[1].replace(",",""))
+    return no_reads
+
 def read_spa_txt(sample_dict, fields):
     """
         Read spa txt file and get spa type and repeats
         File with two-line header
         Return a nested dict with sample names and spa results
+        Add the number of spa reads in contig1 from the filename
     """
     results = {}
     for sample, file in sample_dict.items():
@@ -43,11 +50,12 @@ def read_spa_txt(sample_dict, fields):
             next(csvfile)
             csvreader = csv.DictReader(csvfile, delimiter='\t')
             for row in csvreader:
-                spa_data = {gene: row[gene] for gene in fields}
+                spa_data = {gene: row[gene] for gene in fields[0:2]}
                 results[sample] = {
                     **spa_data
                 }
                 break
+        results[sample][fields[2]] = get_no_reads(sample, sample_dict, SPA_FILE_PATTERN)
     return results
 
 def read_restox_txt(sample_dict, fields):
@@ -74,31 +82,34 @@ def read_krocus_txt(sample_dict, fields):
         Get row with highest coverage
         Return a nested dict with sample names, ST, coverage and alleles
         When no allele is found add NA to dict
+        Add the number of MLST reads from the filename
     """
     results = {}
     for sample, file in sample_dict.items():
         with open(file, 'r') as csvfile:
                 csvreader = csv.DictReader(csvfile, delimiter='\t', fieldnames=fields, restval="NA")
                 sorted_rows = sorted(csvreader, key=lambda d: float(d['coverage']), reverse=True)
-                for s, row in enumerate(sorted_rows, start=1):
-                    if s == 1:
-                        krocus_data = {gene: row[gene] for gene in fields[0:2]}
+                best_row = sorted_rows[0]
 
-                        # Initialize all allele values with 'NA'
-                        for gene in fields[2:]:
-                            krocus_data[gene] = "NA"
+                st_fields = fields[:2]
+                allele_fields = fields[2:9]
+                # Start with ST and coverage
+                krocus_data = {gene: best_row[gene] for gene in st_fields}
+                # Initialize all allele values with 'NA'
+                krocus_data.update({gene: "NA" for gene in allele_fields})
 
-                        # Try to match each value to a fieldname
-                        for value in row.values():
-                            match = re.match("(^\S+)\(", str(value).lower())
-                            if match:
-                                gene_name = match.group(1)
-                                for gene in fields[2:]:
-                                    if gene.lower() == gene_name and krocus_data[gene] == "NA":
-                                        krocus_data[gene] = value
-                                        break
-
-                        results[sample] = krocus_data
+                # Try to match each value to a fieldname
+                for value in best_row.values():
+                    match = re.match("(^\S+)\(", str(value).lower())
+                    if match:
+                        gene_name = match.group(1)
+                        for gene in allele_fields:
+                            if gene.lower() == gene_name and krocus_data[gene] == "NA":
+                                krocus_data[gene] = value
+                                break
+                # Add no of MLST reads used by krocus
+                krocus_data[fields[9]] = get_no_reads(sample, sample_dict, KROCUS_FILE_PATTERN)
+                results[sample] = krocus_data
     return results
 
 def add_quota(results_dict):
